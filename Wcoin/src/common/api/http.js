@@ -7,9 +7,7 @@ import local from '@/common/api/localSession.js'
 let cancel, promiseArr = {};
 const CancelToken = axios.CancelToken;
 
-//axios.defaults.baseURL = 'http://192.168.1.171:8085/';
-//axios.defaults.baseURL = 'http://192.168.1.128:8085/';
-axios.defaults.baseURL = 'http://114.55.165.42:8085/';
+axios.defaults.baseURL = 'http://localhost:8085/';
 
 axios.defaults.headers = {
     'X-Requested-With': 'XMLHttpRequest'

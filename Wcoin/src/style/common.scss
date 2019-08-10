@@ -1,0 +1,181 @@
+/**
+ * 	（公共样式库）
+ * 	 头部banner、字体粗细、字体间距、flex垂直居中
+ *   iview -tab默认
+ * 
+ * */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+}
+input[type="number"]{
+    -moz-appearance: textfield;
+}
+.ivu-spin-fix {z-index: 99;}  //loading
+ //按钮
+.ivu-btn {
+    color: #fff;
+    background-color: $color-body-c !important;
+    border-color: $color-body-c !important;
+    &:hover {
+        color: #c8d1ff;
+    }
+}
+.ivu-select-visible .ivu-select-selection, .ivu-btn:focus, .ivu-input:focus {box-shadow: none;}
+.ivu-select-selection-focused, .ivu-select-selection:hover, .ivu-input:hover {border-color: $color-body-c !important;}
+.ivu-btn-long {
+    font-size: $font-size-base;
+    background-color: $color-body-c !important;
+    border-color: $color-body-c !important;
+}
+
+.ivu-tabs-mini .ivu-tabs-tab {font-size: $font-size-base;}
+.ivu-tabs-nav-scroll {
+    text-align: center;
+    .ivu-tabs-nav {
+        display: inline-block;
+        padding: 5px 0; 
+        float: initial;
+        .ivu-tabs-tab:hover {color: $color-body-c !important;}
+        .ivu-tabs-tab-active {color: $color-body-c !important;}
+    }
+    .ivu-tabs-ink-bar {background-color: $color-body-c !important;}
+}
+//loading
+.ivu-spin-fix {position: fixed;}
+
+.fade-enter-active, .fade-leave-active {
+  transition: opacity .5s;
+}
+.fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+  opacity: 0;
+}
+// ---------------------------------------------------  ivew  ---------------------------------------------------------------------------------------------------
+
+body, html {font-size: 12px !important;}
+
+body {
+    font-family: 'PingFang SC',"Microsoft Yahei UI","Microsoft Yahei",微软雅黑,"Segoe UI",Tahoma,SimSun,sans-serif !important;
+    color: #2d395b;
+}
+
+//去掉蓝色边框线
+a,button,input{ outline:none; border:0;resize:none; }
+
+input{ outline:none; border:0; }
+input:focus{outline:none; box-shadow: none!important;border-color: $color-body-c!important;}
+
+a {color: $color-body-c;}
+a:hover {color: $color-body-c;text-decoration: none;}
+
+img {height: 100%;max-width: initial; vertical-align: top;}
+
+.margin {margin: 0 auto;}
+.pad-sm {padding: 15px 0;}
+.pad-right-sm {padding-right: 10px;}
+.pad-left-sm {padding-left: 10px;}
+
+.color-bk {color: $color-black;}
+.color-body-c, .colorBody {color: $color-body-c;}
+.color-reg, .colorRed {color: $color-error;}
+.color-warn {color: $color-warn;}
+.color-gray {color: $color-common;}
+.colorBlue {color: $color-blue-bg;}
+.color-green {color: $color-green;}
+
+.left {float: left;}
+.right { float: right;}
+.hide { display: none;}
+.show { display: block;}
+
+.ellipsis {overflow: hidden;text-overflow: ellipsis;white-space: nowrap;}
+
+.flex-alg {align-items: center;}
+.font-md {font-size: $font-size-mds;}
+.font-wb {font-weight: bold;}
+
+.clearfix {zoom: 1;}
+.clearfix::after {
+    content: '.';
+    display: block;
+    clear: both;
+    height: 0;
+	line-height: 0;
+    visibility: hidden;
+}
+
+//字体间距
+.text-letter {line-height: 2;letter-spacing: 0.166rem;}
+
+/* 文字省略 */
+/*一行文字溢出省略号*/
+.ellipsis-xs{
+     overflow:hidden; 
+     text-overflow:ellipsis; 
+     white-space: nowrap;
+}
+
+/*两行文字溢出省略号*/
+.ellipsis-sm{
+     display:-webkit-box; 
+     -webkit-line-clamp:2; 
+     -webkit-box-orient: vertical; 
+     overflow:hidden;
+     text-overflow:ellipsis;
+}
+
+
+//主体渐变
+.backgColor-bg {
+	background: #7e58fa; /* Old browsers */
+	background: -moz-linear-gradient(left, #7e58fa 0%, #7e58fa 0%, #7e58fa 20%, #ca1fb8 79%, #d119b2 100%); /* FF3.6-15 */
+	background: -webkit-linear-gradient(left, #7e58fa 0%,#7e58fa 0%,#7e58fa 20%,#ca1fb8 79%,#d119b2 100%); /* Chrome10-25,Safari5.1-6 */
+	background: linear-gradient(to right, #7e58fa 0%,#7e58fa 0%,#7e58fa 20%,#ca1fb8 79%,#d119b2 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#7e58fa', endColorstr='#d119b2',GradientType=1 ); /* IE6-9 */
+}
+
+
+/*定义滚动条高宽及背景 高宽分别对应横竖滚动条的尺寸*/
+::-webkit-scrollbar {
+    width: 2px;
+    height: 0;
+    background-color: #F5F5F5;
+}
+
+/*定义滚动条轨道 内阴影+圆角*/
+::-webkit-scrollbar-track {
+    //-webkit-box-shadow: inset 0 0 1px rgba(0, 0, 0, 0);
+    border-radius: 10px;
+    background-color: #F5F5F5;
+}
+
+/*定义滑块 内阴影+圆角*/
+::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    //-webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, .3);
+    background-color: $color-body-c;
+}
+
+
+@media only screen and (max-width: 480px) {
+	/*定义滚动条高宽及背景 高宽分别对应横竖滚动条的尺寸*/
+	::-webkit-scrollbar {
+	    width: 0;
+	    height: 0;
+	}
+}
+
+/*
+* 	用法： @include flex-direction(column);
+* 	weui-cell  左右布局
+* */ 
+.weui-cell {
+    @include display-flex();
+    @include justify-content(center);
+    @include align-item(center);
+	.weui-cell-hd {display: inline-block;}
+	.weui-cell-ft {display: inline-block;}
+	.weui-cell-bd {
+		flex: 1;
+	}
+}

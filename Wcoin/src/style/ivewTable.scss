@@ -1,0 +1,12 @@
+// table
+/deep/.ivu-table-wrapper {
+    border: none !important;
+    .ivu-table {
+        font-size: $font-size-sm;
+        color: #2d395b;
+        th {height: 55px;background-color: transparent !important;}
+        &::before, &::after {opacity: 0;}
+    }
+    .ivu-table-body .ivu-table-row:last-child td {border-bottom: none !important;}
+        
+}

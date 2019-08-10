@@ -1,0 +1,212 @@
+//@include fct;
+
+//定位全屏
+@mixin allcover {
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+//transform上下左右居中
+@mixin ct {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+//定位上下左右居中
+@mixin ctp($width, $height) {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-top: -$height/2;
+    margin-left: -$width/2;
+}
+
+//flex上下左右剧中
+@mixin fct() {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+//定位上下居中
+@mixin tb {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+//flex上下剧中
+@mixin ftb {
+    display: flex;
+    align-items: center;
+}
+
+//定位左右居中
+@mixin lr {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+//flex左右剧中
+@mixin flr() {
+    display: flex;
+    justify-content: center;
+}
+
+//宽高
+@mixin wh($width, $height) {
+    width: $width;
+    height: $height;
+}
+
+//字体大小、行高、字体
+@mixin ft($size, $line-height) {
+    font-size: $size;
+    line-height: $line-height;
+}
+
+//字体大小，颜色
+@mixin sc($size, $color) {
+    font-size: $size;
+    color: $color;
+}
+
+//flex 布局和 子元素 对其方式
+@mixin fj($type: space-between) {
+    display: flex;
+    justify-content: $type;
+}
+
+//2倍图、3倍图，默认2倍图
+@mixin bg-image($url) {
+    background-image: url("./images/"+ $url + "@2x.png");
+
+    @media only screen and (-webkit-min-device-pixel-ratio: 2),
+    only screen and (min-device-pixel-ratio: 2) {
+        background-image: url("./images/"+ $url + "@3x.png");
+    }
+}
+
+//多行超出省略号
+@mixin ellipsis($line: 2, $line-height: 1.2) {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: $line;
+    line-height: $line-height;
+}
+
+@mixin modalbg($color-bg: rgba(0, 0, 0, 0.2)) {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: $color-bg;
+}
+
+@mixin flex($direction: column, $wrap: nowrap) {
+    display: flex;
+    flex-direction: $direction;
+    flex-wrap: $wrap;
+}
+
+@mixin clear() {
+    &:after {
+        content: '.';
+        clear: both;
+        display: block;
+        width: 0;
+        height: 0;
+        visibility: hidden;
+    }
+}
+
+// flex弹性布局
+@mixin display-flex() {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+}
+
+@mixin justify-content($justify-content) {
+    @if $justify-content == 'flex-start' {
+        -webkit-box-pack: start;
+    }
+    @if $justify-content == 'flex-end' {
+        -webkit-box-pack: end;
+    }
+    @if $justify-content == 'center' {
+        -webkit-box-pack: center;
+    }
+    @if $justify-content == 'space-between' {
+        -webkit-box-pack: justify;
+    }
+    -webkit-justify-content: $justify-content;
+    justify-content: $justify-content;
+}
+
+
+@mixin align-item($align-items) {
+    @if $align-items == 'flex-start' {
+        -webkit-box-align: start;
+    }
+    @if $align-items == 'flex-end' {
+        -webkit-box-align: end;
+    }
+    @if $align-items == 'center' {
+        -webkit-box-align: center;
+    }
+    @if $align-items == 'baseline' {
+        -webkit-box-align: baseline;
+    }
+    @if $align-items == 'stretch' {
+        -webkit-box-align: stretch;
+    }
+    -webkit-align-items: $align-items;
+    align-items: $align-items;
+}
+
+
+// row or column
+@mixin flex-direction($direction) {
+    @if $direction == 'row' {
+        -webkit-box-orient: horizontal;
+        -webkit-box-direction: normal;
+    }
+    @if $direction == 'row-reverse' {
+        -webkit-box-orient: horizontal;
+        -webkit-box-direction: reverse;
+    }
+    @if $direction == 'column' {
+        -webkit-box-orient: vertical;
+        -webkit-box-direction: normal;
+    }
+    -webkit-flex-direction: $direction;
+    flex-direction: $direction;
+}
+
+@mixin flex-wrap($alignment) {
+	@if $alignment == 'nowrap' {
+		vertical-align: $alignment;
+	}
+	@if $alignment == 'wrap' {
+		-webkit-box-lines: single;
+	}
+
+    -webkit-flex-wrap: $alignment;
+    flex-wrap: $alignment;
+}
+
+@mixin flex-size($flex-size) {
+	-webkit-box-flex: $flex-size;
+		-ms-flex: $flex-size;
+			flex: $flex-size;
+}
+// 用法： @include flex-direction(column);

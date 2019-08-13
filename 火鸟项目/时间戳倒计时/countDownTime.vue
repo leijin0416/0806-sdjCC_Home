@@ -77,10 +77,11 @@ export default {
                         format = `${min}分${sec}秒`;
                     }
                     self.content = format;
-                    } else {
-                        clearInterval(timer);
-                        self.content = self.endText;
-                        self._callback();
+                } else {
+                    
+                    clearInterval(timer);       //清除计时器
+                    self.content = self.endText;
+                    self._callback();
                 }
             }, 1000);
         },

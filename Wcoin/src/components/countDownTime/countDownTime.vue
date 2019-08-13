@@ -30,10 +30,16 @@ export default {
         this.countdowm(this.endTime);
     },
     methods: {
+        /** 注意区分时间戳
+         *      十位：1530510150 转十三位  ---> *1000
+         *      十三位：1530510150113 转十位 ---> /1000
+         * 
+         *      timestamp 后台给的十三位
+         */
         countdowm(timestamp) {
             let self = this;
             let timer = setInterval(function() {
-                
+
                 let EndTime= timestamp / 1000;//结束时间
                 let NowTime = new Date();//当前时间
 

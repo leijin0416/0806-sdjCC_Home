@@ -7,9 +7,12 @@
      !regNum.test(showKeyValue)   //不为纯数字时
 
 ```js
+ // 四舍五入
+( num * value ).toFixed(4);    
 
-( num * value ).toFixed(4);     -四舍五入
+// 转换为数值
+parseFloat(this.otcList.sell_lave_count); 
 
-parseFloat(this.otcList.sell_lave_count);   -转换为数值
-
+// 两个数相除取整
+Math.ceil(this.Pagetotal/this.Pagesize);    
 ```

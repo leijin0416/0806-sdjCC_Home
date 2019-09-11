@@ -1,7 +1,7 @@
 #### 移动端上拉加载和下拉刷新的vue插件： mescroll.js
 
 - 1、完成上拉加载；
-- 2、完成图标返回顶部；
+- 2、监听滚动事件 实现某元素吸顶或者固定位置显示；
 
 ```js
 
@@ -101,7 +101,7 @@ ScreenList（m-list） 为数据的组件，MescrollVue 为加载的组件；
 ```
 
 在vue.config.js文件中配置即可使用：
-```
+```css
     css: {
         extract: true, 
         loaderOptions: {
@@ -133,3 +133,45 @@ ScreenList（m-list） 为数据的组件，MescrollVue 为加载的组件；
 ```
 
 参考文章：https://www.jianshu.com/p/9af556e0f2fc
+
+---
+
+#### vue监听滚动事件 实现某元素吸顶或者固定位置显示
+
+```js
+    /**
+    *  显示返回按钮
+    */
+    handleScroll () {
+        let scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop;
+        let offsetTop = document.querySelector('#searchBar').offsetTop;
+
+        if (scrollTop > offsetTop) {
+            this.searchBarFixed = true;
+        } else {
+            this.searchBarFixed = false;
+            //this.$emit('onSearchBarFixed', false)
+        }
+        // console.log(scrollTop);
+        // console.log(offsetTop);
+        
+    },
+    /**
+    *  返回动画
+    */
+    searchBarClick() {
+        let top = document.documentElement.scrollTop || document.body.scrollTop;
+        // 实现滚动效果 
+        const timeTop = setInterval(() => {
+            document.body.scrollTop = document.documentElement.scrollTop = top -= 50;
+            if (top <= 0) {
+                clearInterval(timeTop);
+            }
+        }, 10);
+        //window.animate({scrollTop:0},500);
+    },
+```
+
+参考文章：https://blog.csdn.net/qq_42221334/article/details/80969890
+
+参考文章：https://blog.csdn.net/weixin_30642267/article/details/99667554

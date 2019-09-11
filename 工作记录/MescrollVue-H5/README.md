@@ -139,15 +139,15 @@ ScreenList（m-list） 为数据的组件，MescrollVue 为加载的组件；
 
 #### - vue监听滚动事件 实现某元素吸顶或者固定位置显示
 
-handleScroll() 监听元素到顶部的距离，并判断滚动的距离如果大于了元素（#searchBar）到顶部的距离时，设置searchBar为true,否则就是false
+handleScroll() 监听元素到顶部的距离，并判断当 滚动的距离如果大于了 元素（#searchBar）到顶部的距离时，设置 searchBarFixed 为true,否则就是false
 
 ```js
     /**
     *  显示返回按钮
     */
     handleScroll () {
-        let scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop;
-        let offsetTop = document.querySelector('#searchBar').offsetTop;
+        let scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop; // 顶部
+        let offsetTop = document.querySelector('#searchBar').offsetTop; // 元素
 
         if (scrollTop > offsetTop) {
             this.searchBarFixed = true;

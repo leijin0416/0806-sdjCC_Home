@@ -101,7 +101,7 @@ ScreenList（m-list） 为数据的组件，MescrollVue 为加载的组件；
 ```
 
 在vue.config.js文件中配置即可使用：
-```css
+```js
     css: {
         extract: true, 
         loaderOptions: {

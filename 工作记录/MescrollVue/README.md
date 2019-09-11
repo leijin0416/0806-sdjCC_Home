@@ -3,7 +3,7 @@
 - 1、完成上拉加载；
 - 2、完成图标返回顶部；
 
-```
+```js
 
 npm install --save mescroll.js      //不要使用cnpm安装
 
@@ -20,7 +20,7 @@ ScreenList（m-list） 为数据的组件，MescrollVue 为加载的组件；
 ---
 
 #### 手动分页：
-```
+```js
 <script>
 
     let pageHouseList = res.data.data.houses;
@@ -61,7 +61,7 @@ ScreenList（m-list） 为数据的组件，MescrollVue 为加载的组件；
 
 #### 当数据都加载完成后，会隐藏刷新的状态：
 
-```
+```js
 <script>
 
     /**
@@ -79,7 +79,7 @@ ScreenList（m-list） 为数据的组件，MescrollVue 为加载的组件；
 </script>
 ```
 #### 优化滑动效果：
-```
+```css
 // 设定高度
 .mescroll {
     //-webkit-overflow-scrolling:touch;

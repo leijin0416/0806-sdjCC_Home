@@ -1,16 +1,18 @@
 <template>
     <div class="page" id="searchBar">
+
         <mescroll-vue 
             ref="mescroll" 
             :down="mescrollDown" 
             :up="mescrollUp" 
             @init="mescrollInit" class="scrollView">
-            
+            <!-- 数据列表 -->
             <m-list 
                 @OnshowInfoClick="OnshowInfoClick"
                 :HouseList="articleList" />
 
         </mescroll-vue>
+
         <!-- 返回顶部 -->
         <div class="m-top-img"
             id="toTop" 
@@ -18,6 +20,7 @@
             @click="searchBarClick">
             <img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1568196620635&di=fd19064dc428e841bc5fd51aee4177ff&imgtype=0&src=http%3A%2F%2Fpic.51yuansu.com%2Fpic2%2Fcover%2F00%2F31%2F21%2F5810a9d3c190f_610.jpg" alt="top.png" class="img">
         </div>
+
     </div>
 </template>
 
@@ -46,8 +49,8 @@ export default {
             },
             articleList: [], // 列表数据
 
-			Pagetotal: 0,//总条数
-			Pagesize: 5,//每页显示多少条
+            Pagetotal: 0,//总条数
+            Pagesize: 5,//每页显示多少条
             historyData: [],//分页数据的盒子
             
             searchBarFixed: false,
@@ -59,20 +62,8 @@ export default {
             default:50
         }
     },
-    beforeRouteEnter (to, from, next) { 
-        next(vm => {
-            vm.$refs.mescroll.beforeRouteEnter(); 
-            // 进入路由时,滚动到原来的列表位置,恢复回到顶部按钮和isBounce的配置
-            
-        })
-    },
-    beforeRouteLeave (to, from, next) { 
-        this.$refs.mescroll.beforeRouteLeave(); 
-        // 退出路由时,记录列表滚动的位置,隐藏回到顶部按钮和isBounce的配置
-        next()
-    },
     components: {
-		'm-list': ScreenList,
+        'm-list': ScreenList,
         MescrollVue // 注册mescroll组件
     },
     //监听属性 类似于data概念
@@ -132,7 +123,7 @@ export default {
                 .catch( res => {console.log('请求出错了');})
             }, 2000);
         },
-		/**
+        /**
          *  changePages 手动控制分页
          *  - 因为每次滑动到底部都会触发 upCallback 访问接口的事件，所以用changePages做分页
          *  - houses 为每次滑动的不同数据，然后通过for循环遍历里面的数据，最后通过 push 添加到 articleList数组中
@@ -183,6 +174,18 @@ export default {
             }, 10);
             //window.animate({scrollTop:0},500);
         },
+    },
+    beforeRouteEnter (to, from, next) { 
+        next(vm => {
+            vm.$refs.mescroll.beforeRouteEnter(); 
+            // 进入路由时,滚动到原来的列表位置,恢复回到顶部按钮和isBounce的配置
+            
+        })
+    },
+    beforeRouteLeave (to, from, next) { 
+        this.$refs.mescroll.beforeRouteLeave(); 
+        // 退出路由时,记录列表滚动的位置,隐藏回到顶部按钮和isBounce的配置
+        next()
     },
     //生命周期 - 创建完成（可以访问当前this实例）
     created() {},

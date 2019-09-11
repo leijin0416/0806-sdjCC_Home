@@ -1,7 +1,8 @@
 #### 移动端上拉加载和下拉刷新的vue插件： mescroll.js
 
 - 1、完成上拉加载；
-- 2、监听滚动事件 实现某元素吸顶或者固定位置显示；
+- 2、实现手动分页；
+- 3、监听滚动事件 实现某元素吸顶或者固定位置显示；
 
 ```js
 
@@ -19,7 +20,7 @@ ScreenList（m-list） 为数据的组件，MescrollVue 为加载的组件；
 
 ---
 
-#### 手动分页：
+#### - 手动分页：
 ```js
 <script>
 
@@ -59,7 +60,7 @@ ScreenList（m-list） 为数据的组件，MescrollVue 为加载的组件；
 <script>
 ```
 
-#### 当数据都加载完成后，会隐藏刷新的状态：
+#### - 当数据都加载完成后，会隐藏刷新的状态：
 
 ```js
 <script>
@@ -78,7 +79,7 @@ ScreenList（m-list） 为数据的组件，MescrollVue 为加载的组件；
 
 </script>
 ```
-#### 优化滑动效果：
+#### - 优化滑动效果：
 ```css
 // 设定高度
 .mescroll {
@@ -94,7 +95,7 @@ ScreenList（m-list） 为数据的组件，MescrollVue 为加载的组件；
 
 ---
 
-#### 引入postcss-px-to-viewport插件 （vw适配）：
+#### - 引入postcss-px-to-viewport插件 （vw适配）：
 
 ```
     npm install postcss-loader postcss-px-to-viewport --save
@@ -136,7 +137,9 @@ ScreenList（m-list） 为数据的组件，MescrollVue 为加载的组件；
 
 ---
 
-#### vue监听滚动事件 实现某元素吸顶或者固定位置显示
+#### - vue监听滚动事件 实现某元素吸顶或者固定位置显示
+
+handleScroll() 监听元素到顶部的距离，并判断滚动的距离如果大于了元素（#searchBar）到顶部的距离时，设置searchBar为true,否则就是false
 
 ```js
     /**

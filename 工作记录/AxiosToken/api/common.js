@@ -1,5 +1,5 @@
 /**   
- *  [api接口统一管理]   
+ *  [ api接口统一管理 ]   
  *     
  *  “引入axios的封装方法”
  *  import { post } from '@/common/api/http'

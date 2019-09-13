@@ -6,6 +6,13 @@
 
 ```js
 
+    // 监听滚动事件
+    window.addEventListener('scroll', this.handleScroll);
+
+```
+
+```js
+
 npm install --save mescroll.js      //不要使用cnpm安装
 
 外部在引用 MescrollVue 组件时，也可以通过 <router-view></router-view> 的形式展示出来；
@@ -22,29 +29,29 @@ ScreenList（m-list） 为数据的组件，MescrollVue 为加载的组件；
 
 #### - 手动分页：
 ```js
-<script>
-
-    let pageHouseList = res.data.data.houses;
-    
-    // 分页-保存取到的所有数据到数组中
-    this.historyData = res.data.data.houses;
-    this.Pagetotal = res.data.data.houses.length; //获取数组长度
-    // 初始化显示，小于每页显示条数，全部显示，大于每页显示条数，取前每页条数显示
-    if(res.data.data.houses.length < this.Pagesize){
-        this.articleList = this.historyData;
-
-    } else{
-        if (num === 1) {
-            this.articleList = this.historyData.slice(0,this.Pagesize);
-        } else {
-            this.changePages(num);
-        }
+    upCallback() {
+        let pageHouseList = res.data.data.houses;  //后台数据
         
-    }
+        // 分页-保存取到的所有数据到数组中
+        this.historyData = res.data.data.houses;
+
+        this.Pagetotal = res.data.data.houses.length; //获取数组长度
+        // 初始化显示，小于每页显示条数，全部显示，大于每页显示条数，取前每页条数显示
+        if(res.data.data.houses.length < this.Pagesize){
+            this.articleList = this.historyData;
+
+        } else{
+            if (num === 1) {
+                this.articleList = this.historyData.slice(0,this.Pagesize);
+            } else {
+                this.changePages(num);
+            }
+            
+        }
+    },
 
     --------------
-
-    
+    // 当用户上拉时再分页，根据 upCallback 返回的 page.num 进行
     changePages(index) {
         let _start = ( index - 1 ) * this.Pagesize;
         let _end = index * this.Pagesize;
@@ -57,27 +64,24 @@ ScreenList（m-list） 为数据的组件，MescrollVue 为加载的组件；
         }
     },
 
-<script>
 ```
 
 #### - 当数据都加载完成后，会隐藏刷新的状态：
 
 ```js
-<script>
 
     /**
-        *  获取当前总页数,取整数
-        */
+    *  获取当前总页数,取整数
+    */
     let page=Math.ceil(this.Pagetotal/this.Pagesize);
     
     /**
-        *  数据渲染成功后, 隐藏下拉刷新的状态， 后台接口有返回列表的总页数 page
-        */
+    *  数据渲染成功后, 隐藏下拉刷新的状态， 后台接口有返回列表的总页数 page
+    */
     this.$nextTick(() => {
         mescroll.endByPage(this.Pagetotal, page);
     });
 
-</script>
 ```
 #### - 优化滑动效果：
 ```css

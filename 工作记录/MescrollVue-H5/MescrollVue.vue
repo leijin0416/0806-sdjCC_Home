@@ -121,7 +121,7 @@ export default {
                     } else {mescroll.endErr();console.log(res.data.msg);}
                 }) 
                 .catch( res => {console.log('请求出错了');})
-            }, 2000);
+            }, 1000);
         },
         /**
          *  changePages 手动控制分页

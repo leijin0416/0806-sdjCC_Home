@@ -18,7 +18,7 @@ http://chaping.github.io/plupload/doc/
 ---
 #### 分析：
 
-1、customInsert() - 组件上传成功的回调；
+1、customInsert() - 图片上传成功时的回调；
 
 2、watch -监听父组件传过来的 value 值变化，通过 editor.txt.html(this.content) 来改变editor中的内容；
 

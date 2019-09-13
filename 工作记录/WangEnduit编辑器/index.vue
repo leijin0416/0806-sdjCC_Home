@@ -2,7 +2,6 @@
     <div class="editor-box" >
         <editor-bar 
             v-model="values" 
-            :isClear="isClear" 
             @change="OnTextChangeGg" />
     </div>
 </template>
@@ -22,14 +21,10 @@ export default {
     model: {
     },
     props: {
-        value: {
+        valueIndex: {
             type: String,
             default: ''
         },
-        isClear: {
-            type: Boolean,
-            default: false
-        }
     },
     watch: {
     },

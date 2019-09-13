@@ -2,6 +2,7 @@
     <div class="editor" >
         <div ref="toolbar" class="toolbar">
         </div>
+        
         <div ref="editor" class="text">
         </div>
     </div>
@@ -50,7 +51,7 @@
                     this.editor.txt.html(this.value)
                 }
             }
-        //value为编辑框输入的内容，这里我监听了一下值，当父组件调用得时候，如果给value赋值了，子组件将会显示父组件赋给的值
+            // value 为编辑框输入的内容，这里我监听了一下值，当父组件调用得时候，如果给value赋值了，子组件将会显示父组件赋给的值
         },
         mounted() {
             this.seteditor();
@@ -58,11 +59,10 @@
         },
         methods: {
             seteditor() {
-                
                 this.editor = new E(this.$refs.toolbar, this.$refs.editor);
 
                 //this.editor.customConfig.uploadImgShowBase64 = true; // base 64 存储图片
-                this.editor.customConfig.uploadImgServer = 'http://47.112.115.82:8081/uploadImg';// 配置服务器端地址
+                this.editor.customConfig.uploadImgServer = 'uploadImg';// 配置服务器端地址
                 
                 // withCredentials（跨域传递 cookie）
                 this.editor.customConfig.withCredentials = true;
@@ -149,15 +149,8 @@
                          * 
                          */
 
-                        //循环插入图片
-                        // for (let i = 0; i < 1; i++) {
-                        // console.log(result)
-                        // }
-
                         let url = result.data;
-                        //console.log(result);
-                        
-                        insertImg(url);
+                        insertImg(url); //插入图片
                     }
                 }
                 this.editor.customConfig.onchange = (html) => {

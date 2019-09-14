@@ -1,6 +1,6 @@
 ```js
 //使用npm下载最新版本：
-npm install wangeditor --s
+npm install wangeditor --save
 ```
 
 #### wangEditor 官网：

@@ -1,7 +1,7 @@
 /**
  *  Vuex + localStorage数据状态持久化
  */
-import { setStore } from '@/common/util'
+import { setStore } from './node_modules/@/common/util'
 
 export default {
     //模块成为带有命名空间的模块

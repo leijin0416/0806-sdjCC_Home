@@ -50,6 +50,9 @@ customInsert: (insertImg, result, editor) => {
 ```
 
 #### 模板引用组件：
+
+组件通信通信可看：https://juejin.im/post/5d699e2b6fb9a06ae3727746
+
 ```js
 /**
  *  子组件传过来的值 - 进行双向绑定

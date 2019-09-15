@@ -48,8 +48,6 @@ new Vue({
 
 ("localData", [ ]) - 模块名（嵌套层级要写清楚）;
 
-辅助函数 -这里我们用到了es6的扩展运算符;
-
 ```js
 // 辅助函数
 import { mapState, mapMutations, mapActions, mapGetters } from "vuex"
@@ -79,6 +77,7 @@ export default {
     methods: {
         //传
         ...mapMutations("localData", ['handleUserSession', ]),
+        
         OnActivesClick(val){
             //console.log(val);
             this.handleUserSession(val);
@@ -87,3 +86,9 @@ export default {
     },
 }
 ```
+
+#### 辅助函数 -这里用到了es6的扩展运算符
+
+- ...mapMutations("localData") - localData 是指 modules 文件夹下的 localData.js
+
+- "handleUserSession" - localData.js 文件中的 mutations 里的方法，在上面的 @click 中执行并传入实参

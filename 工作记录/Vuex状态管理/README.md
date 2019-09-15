@@ -8,7 +8,7 @@ Vuex Api：https://vuex.vuejs.org/zh/api
 
 vuex 是一个专门为vue.js应用程序开发的**状态管理模式**。它采用集中式存储管理应用的所有组件状态，并以相应的规则保证状态以一种可预测的方式发生变化。vuex 解决了组件之间同一状态的共享问题。
 
-{% img https://leijin0416.coding.me/images/08_04/icon-hd_0915.jpg %}
+![vuex](https://leijin0416.coding.me/images/08_04/icon-hd_0915.jpg) 
 
 
 知识点：https://github.com/LeeGitHub0817/summary

@@ -1,11 +1,11 @@
 import Vue from 'vue'
-import Vuex from './node_modules/vuex'
+import Vuex from 'vuex'
 
 /**
  *  
  *  配置,暴露home模块
  */
-import home from './mutations'
+import home from './modules'
 
 let modulesData = {
     ...home,

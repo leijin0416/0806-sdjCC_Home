@@ -19,7 +19,7 @@ vuex 解决了组件之间同一状态的共享问题
 //模块成为带有命名空间的模块
 namespaced: true
 ```
-store/mutations/index.js
+store/modules/index.js
 
 store/store.js
 
@@ -44,9 +44,11 @@ new Vue({
 
 2、模板
 
-通过`store.js` 的`localData`暴露出的属性
+通过`store.js` 的`localData`暴露出的属性;
 
-"localData" - 模块名（嵌套层级要写清楚）
+("localData", [ ]) - 模块名（嵌套层级要写清楚）;
+
+辅助函数 -这里我们用到了es6的扩展运算符;
 
 ```js
 // 辅助函数

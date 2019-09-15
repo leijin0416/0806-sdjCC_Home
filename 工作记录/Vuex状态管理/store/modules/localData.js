@@ -1,7 +1,7 @@
 /**
- *  Vuex + localStorage数据状态持久化
+ *  Vuex + localStorage 数据状态持久化
  */
-import { setStore } from './node_modules/@/common/util'
+import { setStore } from '@/common/util'
 
 export default {
     //模块成为带有命名空间的模块
@@ -25,7 +25,7 @@ export default {
     },
     /**
      *  3、自定义触发mutations里函数的方法，context与store 实例具有相同方法和属性，list 为要变化的形参;
-     *  async / await 异步代码
+     *     async / await 异步代码
      */
     actions: {
 		async getRankData({commit}, list) {
@@ -46,9 +46,8 @@ export default {
     },
     /**
      *  4、如何变化 datalist - mutations里面存放的是方法名
-     *  提前定义方法名 - "SET_RANKDATAS"
+     *     提前定义方法名 - "SET_RANKDATAS"
      */
-	//
     mutations: {
         [types.SET_RANKDATAS](state, list) {
 			//能够获取到当前状态树的state,提交mutation的时候传的参数

@@ -1,20 +1,18 @@
 ### Vuex 状态管理模式
 
-Vuex Api：https://vuex.vuejs.org/zh/api
-
 ```js
     npm install vuex --save
 ```
 
+Vuex Api：https://vuex.vuejs.org/zh/api
+
 vuex 是一个专门为 vue.js 应用程序开发的 【**状态管理模式**】。它采用集中式存储管理应用的所有组件状态，并以相应的规则保证状态以一种可预测的方式发生变化。vuex 解决了组件之间同一状态的共享问题。
-
-![vuex](https://camo.githubusercontent.com/315aa37509cd7faf3da72eea210b704afa96294d/68747470733a2f2f6c65696a696e303431362e636f64696e672e6d652f696d616765732f30385f30342f69636f6e2d68645f303931352e6a7067) 
-
 
 知识点：https://github.com/LeeGitHub0817/summary
 
 知识点：https://www.jianshu.com/p/5624362cd1f4
 
+![vuex](https://camo.githubusercontent.com/315aa37509cd7faf3da72eea210b704afa96294d/68747470733a2f2f6c65696a696e303431362e636f64696e672e6d652f696d616765732f30385f30342f69636f6e2d68645f303931352e6a7067) 
 ```js
 /**
  * 核心：

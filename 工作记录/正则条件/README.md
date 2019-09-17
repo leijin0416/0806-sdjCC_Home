@@ -1,6 +1,6 @@
 ### 正则验证
 
-- 组件引用：
+- **组件引用：**
 
 ```js
 // 使用 (模块中引入)：
@@ -11,28 +11,42 @@
     
 
 ```
-- js 转换：
+- **js 转换：**
 
 ```js
 /*
- *   toFixed() -四舍五入;
+ *  toFixed() -四舍五入;
 */
 ( num * value ).toFixed(4);  
 
 /*
- *   parseFloat() -转换为数值;
+ *  parseFloat() -转换为数值;
 */
 parseFloat(this.otcList.sell_lave_count); 
 
 /*
- *   Math.ceil() -两个数相除取整;
+ *  Math.ceil() -两个数相除取整;
 */
 Math.ceil(this.Pagetotal/this.Pagesize);  
 
 /*
- *   reverse() -方法用于颠倒数组中元素的顺序;
+ *  reverse() -方法用于颠倒数组中元素的顺序;
 */
 let messageData = this.historyData.reverse();
+
+```
+
+- **forEach() 用法：**
+
+```js
+/*
+ *  forEach() 
+*/
+all.forEach( (item, i, arr) => {
+    arr[i].loginPwd='******'
+
+    //console.log(item);
+});
 
 ```
 

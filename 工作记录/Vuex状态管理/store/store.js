@@ -24,7 +24,7 @@ export default new Vuex.Store({
 
 
 /**
- *  还可以：
+ *  全局导出 modulesData 方法二：
  *   
     export default new Vuex.Store({
         modules: {

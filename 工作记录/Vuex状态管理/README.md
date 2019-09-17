@@ -4,9 +4,9 @@
     npm install vuex --save
 ```
 
-Vuex Api：https://vuex.vuejs.org/zh/api
+- Vuex 是一个专门为 vue.js 应用程序开发的 【**状态管理模式**】。它采用集中式存储管理应用的所有组件状态，并以相应的规则保证状态以一种可预测的方式发生变化。Vuex 解决了组件之间同一状态的共享问题。
 
-vuex 是一个专门为 vue.js 应用程序开发的 【**状态管理模式**】。它采用集中式存储管理应用的所有组件状态，并以相应的规则保证状态以一种可预测的方式发生变化。vuex 解决了组件之间同一状态的共享问题。
+Vuex Api：https://vuex.vuejs.org/zh/api
 
 知识点：https://github.com/LeeGitHub0817/summary
 
@@ -34,11 +34,11 @@ store/store.js
 
 ---
 
-### 在组件中调用：
+### 在组件中引用：
 
 通过`store.js` 的`localData`暴露出的属性;
 
-#### 1、main.js 注册store
+#### 1、main.js 全局注册store：
 
 ```js
 /**
@@ -54,7 +54,7 @@ new Vue({
 }).$mount('#app')
 ```
 
-#### 2、组件
+#### 2、组件引用：
 
 ("localData", [ ]) - 模块名（嵌套层级要写清楚）;
 
@@ -64,7 +64,10 @@ import { mapState, mapMutations, mapActions, mapGetters } from "vuex"
 
 export default {
     name: 'template',
-    //实时监听
+    /**
+     *  实时监听
+     *  监听 vuex 的 getters 中 user_Session 属性值变化
+     */
     watch: {
         'user_Session': {
             handler: function(newer, older) {

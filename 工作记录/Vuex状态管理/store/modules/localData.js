@@ -46,7 +46,8 @@ export default {
     },
     /**
      *  4、如何变化 datalist - mutations里面存放的是方法名
-     *     提前定义方法名 - "SET_RANKDATAS"
+     * 
+     *     方法二：提前定义方法名 - "SET_RANKDATAS"
      */
     mutations: {
         [types.SET_RANKDATAS](state, list) {

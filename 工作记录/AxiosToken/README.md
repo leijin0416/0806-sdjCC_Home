@@ -1,7 +1,9 @@
 
-### Api 管理： https://juejin.im/post/5d22d6b1e51d45105d63a58e
+### Api 管理
 
-**common/util.js 为常用工具，如存储 localStorage**
+参考文章：https://juejin.im/post/5d22d6b1e51d45105d63a58e
+
+- **common/util.js 为常用工具，如存储 localStorage；**
 
 - api/common.js:
 ```js

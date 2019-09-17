@@ -4,7 +4,7 @@
 import { setStore } from '@/common/util'
 
 export default {
-    //模块成为带有命名空间的模块
+    //模块成为带有命名空间的模块，单个模块这个属性很重要
     namespaced: true,
     /**
      *  1、要设置的全局访问的state对象

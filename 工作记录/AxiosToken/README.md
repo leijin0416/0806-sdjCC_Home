@@ -5,7 +5,10 @@
 
 - **common/util.js 为常用工具，如存储 localStorage；**
 
-- api/common.js:
+- **api/common.js：**
+
+暴露接口：
+
 ```js
     import request from '@/common/api/http'
 ||

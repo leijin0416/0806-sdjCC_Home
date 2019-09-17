@@ -1,9 +1,9 @@
 
 ### Api 管理： https://juejin.im/post/5d22d6b1e51d45105d63a58e
 
-**util.js 为常用工具，如存储 localStorage**
+**common/util.js 为常用工具，如存储 localStorage**
 
-- common.js:
+- api/common.js:
 ```js
     import request from '@/common/api/http'
 ||

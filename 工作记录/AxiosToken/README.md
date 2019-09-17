@@ -1,28 +1,26 @@
 
 #### Api 管理： https://juejin.im/post/5d22d6b1e51d45105d63a58e
 
-util.js 为常用工具，如存储 localStorage
+**util.js 为常用工具，如存储 localStorage**
 
 common.js:
 ```js
     import request from '@/common/api/http'
 ||
     import { post } from '@/common/api/http'
-
-    //*----------------------------------------*/
     
     export const getAdminList = (params) => {
         return request('post', 'pCNotHomePage?type' + '=' + 5, params);
     }
 
-    //*----------------------------------------*/
-    import { getAdminList, apiAddress } from '@/api/common.js';// 导入我们的api接口
 ```
-#### 模板中调用方法：
+#### 组件中调用方法：
 
-1、方法暴露使用：
+1、方法暴露使用（common.js中使用方法二）：
 
 ```js
+    import { getAdminList, apiAddress } from '@/api/common.js';// 导入我们的api接口
+
     onLoad() {
         // 调用api接口，并且提供了两个参数
         apiAddress({
@@ -34,6 +32,8 @@ common.js:
     },
 ```
 
+---
+
 2、异步请求使用：
 
 async函数返回的是一个Promise对象，可以使用then函数添加回调函数
@@ -41,6 +41,8 @@ async函数返回的是一个Promise对象，可以使用then函数添加回调�
 参考文章：https://www.jianshu.com/p/6b626d72ea78
 
 ```js
+    import { getAdminList, apiAddress } from '@/api/common.js';// 导入我们的api接口
+
     created () {
         this.getAdminList(); //异步
     },

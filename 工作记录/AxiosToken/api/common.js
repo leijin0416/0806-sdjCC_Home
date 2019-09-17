@@ -1,14 +1,13 @@
 /**   
  *  [ api接口统一管理 ]   
  *     
- *  “引入axios的封装方法”
- *  import { post } from '@/common/api/http'
  */
 import request from '@/common/api/http'
 
 /**
  *  Common
  * 
+ *  方法二：
  *  import { get, post } from '@/common/api/http'
  *  export const apiAddress = params => post('pCNotHomePage?type' + '=' + 5, params);
  * 

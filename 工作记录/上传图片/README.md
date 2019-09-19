@@ -7,6 +7,8 @@ accept="image/* 上传的类型
 
 #### 传值给父组件
 
+photoImage -为转换base64后的图片数组集合
+
 ```js
 /**
  *  监控data中的数据变化

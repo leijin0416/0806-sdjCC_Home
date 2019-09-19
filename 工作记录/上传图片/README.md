@@ -1,5 +1,8 @@
 ### inputFilesImage -input 上传图片
 
+数组方法：https://wangyupo.github.io/2019/04/14/JS%E6%95%B0%E7%BB%84%E6%96%B9%E6%B3%95
+
+
 accept="image/* 上传的类型
 
 #### 传值给父组件
@@ -55,9 +58,6 @@ components: {
 
 #### 删除元素，好用不赖
 
-数组方法：https://wangyupo.github.io/2019/04/14/JS%E6%95%B0%E7%BB%84%E6%96%B9%E6%B3%95
-
-工具类博主：https://www.cnblogs.com/moqiutao/p/9872066.html
 ```js
 Array.prototype.remove = function(val){
     var index = this.indexOf(val);

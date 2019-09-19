@@ -33,3 +33,11 @@
         </tr>
     </tbody>
 </table>
+
+|文件夹|说明|说明|
+|--|--|--|
+|ZBConfigCommon/ |主要基础代码工程。|
+|ZbConfigMain/ |主APP工程|
+|ZbConfigSetup/ |安装向导，已不再提供 |
+|DB/ |用于测试数据库文件夹，默认密码为admin/admin|
+|res/ |零碎的参考资源|

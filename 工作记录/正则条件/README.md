@@ -1,3 +1,13 @@
+### filters 正则用法
+
+![filters](https://leijin0416.coding.me/images/08_04/icon-hd_0921_2.jpg) 
+
+- filters/index.js -常用方法
+
+- filters/regExps.js -正则方法
+
+- filters/md5Test.js -md5加密方法
+
 ### 正则验证
 
 - **组件引用：**
@@ -12,16 +22,6 @@
 
 ```
 - **js 转换：**
-
-### filters 正则用法
-
-![filters](https://leijin0416.coding.me/images/08_04/icon-hd_0921_2.jpg) 
-
-- filters/index.js -常用方法
-
-- filters/regExps.js -正则方法
-
-- filters/md5Test.js -md5加密方法
 
 
 ```js

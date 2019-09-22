@@ -2,11 +2,33 @@
 
 ![filters](https://leijin0416.coding.me/images/08_04/icon-hd_0921_2.jpg) 
 
-- filters/index.js -常用方法
+- filters/index.js -全局过滤器 常用方法
 
 - filters/regExps.js -正则方法
 
 - filters/md5Test.js -md5加密方法
+
+```js
+/**
+ *  man.js
+ *  全局过滤器
+ */
+import filters from './filters'
+
+Object.keys(filters).forEach(filterName => {
+    Vue.filter(filterName, filters[filterName])
+})
+
+/**
+ *  然后在其他的.vue 文件中就可愉快地使用这些我们定义好的全局过滤器了
+ *  
+ */
+
+<p>千分位分隔符：{{123456 | toThousands}}</p> // 返回 123，456
+
+```
+
+#### VUE 全局过滤器 filter： https://www.jianshu.com/p/6ead0ed825da
 
 ---
 

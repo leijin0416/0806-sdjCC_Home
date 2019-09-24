@@ -6,7 +6,7 @@
 
 - filters/md5Test.js `-md5加密方法`
 
-**filters/index.js 处理列表**
+**filters/index.js 处理方法：**
 
 ![filters](https://leijin0416.coding.me/images/08_04/icon-hd_0921_2.jpg) 
 ```js

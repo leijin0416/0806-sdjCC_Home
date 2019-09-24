@@ -1,4 +1,6 @@
+// 声明
 const local =  {};
+
 /**
  * put 把数据放到本地存储
  * @param {*} key

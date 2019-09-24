@@ -1,5 +1,21 @@
 ### localStorage 缓存
 
+**暴露方法：**
+
+```js
+const local =  {};
+
+local.set = function (key, value) {
+
+    console.log(key+ ',' +value);
+};
+
+export default local
+
+```
+
+---
+
 <table>
     <thead>
         <tr>

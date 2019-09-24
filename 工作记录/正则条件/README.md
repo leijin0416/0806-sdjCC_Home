@@ -74,6 +74,25 @@ let messageData = this.historyData.reverse();
 - **forEach() 用法：**
 
 ```js
+/*  创建新节点  */
+createDocumentFragment() //创建一个DOM片段
+
+createElement() //创建一个具体的元素
+
+createTextNode() //创建一个文本节点
+
+/*  添加、移除、替换、插入  */
+appendChild() removeChild() replaceChild() insertBefore() //在已有的子节点前插入一个新的子节点
+
+getElementsByTagName()      //通过标签名称
+getElementsByName()         //通过元素的Name属性的值(IE容错能力较强，会得到一个数组，其中包括id等于name值的)
+getElementById()            //通过元素Id，唯一性
+
+```
+
+- **DOM操作：**
+
+```js
 /*
  *  forEach() 
 */

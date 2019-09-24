@@ -98,7 +98,10 @@ const realFormatSecond = (second) => {
     }
 };
 
-//处理浮点数小数位数
+/**
+ * 处理浮点数小数位数
+ * 
+ */
 let toFixed = (input, num) => Number(input).toFixed(num)
 
 export default {

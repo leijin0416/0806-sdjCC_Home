@@ -6,6 +6,8 @@
 
 - filters/md5Test.js `-md5加密方法`
 
+**filters/index.js 处理列表**
+
 ![filters](https://leijin0416.coding.me/images/08_04/icon-hd_0921_2.jpg) 
 ```js
 /**
@@ -24,6 +26,12 @@ Object.keys(filters).forEach(filterName => {
  */
 
 <p>千分位分隔符：{{123456 | toThousands}}</p> // 返回 123，456
+
+```
+
+- **js 删除当前元素**
+
+```js
 
 ```
 

@@ -1,10 +1,9 @@
-如何区分深拷贝与浅拷贝，简单点来说，就是假设 B 复制了 A，当修改 A时，<font color="#ff502c">看 B是否会发生变化</font>，如果 B也跟着变了，说明这是浅拷贝，拿人手短，<font color="#ff502c">如果 B没变</font>，那就是深拷贝，自食其力。
+如何区分深拷贝与浅拷贝，简单点来说，就是假设 B 复制了 A，当修改 A时，`看 B是否会发生变化`，如果 B也跟着变了，说明这是浅拷贝，拿人手短，`如果 B没变`，那就是深拷贝，自食其力。
 
-<font color=#0099ff size=7 face="黑体">color=#0099ff size=72 face="黑体"</font>
 
 ### 深拷贝方法
 
-所谓深拷贝，就是能够实现真正意义上的**数组和对象的拷贝**，我们通过<font color="#ff502c">递归</font>调用浅拷贝的方式实现。
+所谓深拷贝，就是能够实现真正意义上的**数组和对象的拷贝**，我们通过`递归`调用浅拷贝的方式实现。
 
 参考1：https://juejin.im/post/5d8aab2af265da5b932e550e
 
@@ -47,7 +46,7 @@ export const keepCloning = (objectpassed) => {
 
 参考3：https://www.zhihu.com/question/23031215
 
-任何一个 prototype对象 都有一个 <font color="red"> constructor属性 </font>，指向它的构造函数。
+任何一个 prototype对象 都有一个 `constructor属性`，指向它的构造函数。
 ```js
 /*
  *  函数可以深拷贝 对象和数组

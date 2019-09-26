@@ -38,6 +38,7 @@ export const keepCloning = (objectpassed) => {
     return temporary_storage;
 }
 ```
+---
 
 ![JS](https://github.com/leijin0416/0806-Record_sdj.cc_Home/blob/master/%E5%B7%A5%E4%BD%9C%E8%AE%B0%E5%BD%95/JavaScript%E6%95%B0%E7%BB%84/JS%E6%B5%85%E3%80%81%E6%B7%B1%E6%8B%B7%E8%B4%9D/%E6%B7%B1%E6%8B%B7%E8%B4%9D.png) 
 

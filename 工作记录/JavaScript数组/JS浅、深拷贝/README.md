@@ -102,8 +102,8 @@ export default {
                         //console.log(item);
                     });
 
-                    console.log(employeeDetailsDuplicate);
-                    console.log(all);
+                    console.log(employeeDetailsDuplicate);  // 拷贝后，不受原数组影响
+                    console.log(all);                       // 原数组数据有变动
 
                 }
             }) 

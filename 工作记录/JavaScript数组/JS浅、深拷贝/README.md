@@ -43,7 +43,7 @@ export const keepCloning = (objectpassed) => {
 
 参考3：https://www.zhihu.com/question/23031215
 
-任何一个 prototype对象 都有一个 <font color="#ff502c">constructor属性</font>，指向它的构造函数。
+任何一个 prototype对象 都有一个 <span style="color: #ff502c"> constructor属性 </span>，指向它的构造函数。
 ```js
 /*
  *  函数可以深拷贝 对象和数组

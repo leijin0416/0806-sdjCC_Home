@@ -8,9 +8,9 @@
 
 参考2：https://www.cnblogs.com/echolun/p/7889848.html
 
-#### util.js：
+#### 【1、】util.js：
 
-- 声明方法 （一）
+**声明方法 （一）**
 
 **【手动实现原理】**
 - 遍历待拷贝对象
@@ -39,7 +39,7 @@ export const keepCloning = (objectpassed) => {
 }
 ```
 
-- 声明方法 （二）-函数可以深拷贝 对象和数组
+**声明方法 （二）**-函数可以深拷贝 对象和数组
 
 参考3：https://www.zhihu.com/question/23031215
 

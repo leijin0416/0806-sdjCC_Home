@@ -1,5 +1,7 @@
 如何区分深拷贝与浅拷贝，简单点来说，就是假设 B 复制了 A，当修改 A时，<font color="#ff502c">看 B是否会发生变化</font>，如果 B也跟着变了，说明这是浅拷贝，拿人手短，<font color="#ff502c">如果 B没变</font>，那就是深拷贝，自食其力。
 
+<font color=#0099ff size=7 face="黑体">color=#0099ff size=72 face="黑体"</font>
+
 ### 深拷贝方法
 
 所谓深拷贝，就是能够实现真正意义上的**数组和对象的拷贝**，我们通过<font color="#ff502c">递归</font>调用浅拷贝的方式实现。
@@ -8,9 +10,11 @@
 
 参考2：https://www.cnblogs.com/echolun/p/7889848.html
 
-#### 【1、】util.js：
+---
 
-**声明方法 （一）**
+### 【1】util.js：
+
+- 声明方法 （一）
 
 **【手动实现原理】**
 - 遍历待拷贝对象
@@ -39,7 +43,7 @@ export const keepCloning = (objectpassed) => {
 }
 ```
 
-**声明方法 （二）**-函数可以深拷贝 对象和数组
+- 声明方法 （二）-函数可以深拷贝 对象和数组
 
 参考3：https://www.zhihu.com/question/23031215
 
@@ -73,7 +77,7 @@ export const keepCloning = (obj) => {
 
 ![JS](https://github.com/leijin0416/0806-Record_sdj.cc_Home/blob/master/%E5%B7%A5%E4%BD%9C%E8%AE%B0%E5%BD%95/JavaScript%E6%95%B0%E7%BB%84/JS%E6%B5%85%E3%80%81%E6%B7%B1%E6%8B%B7%E8%B4%9D/%E6%B7%B1%E6%8B%B7%E8%B4%9D.png) 
 
-#### 使用：
+### 【2】使用：
 
 - 组件引用
 ```js

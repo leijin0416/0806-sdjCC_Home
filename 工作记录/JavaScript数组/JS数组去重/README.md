@@ -2,6 +2,44 @@
 
 ### 【1】利用filter
 
+文章：https://www.cnblogs.com/adouwt/p/9660862.html
+
+- **vue 实例**
+
+```js
+/**
+ * 根据name，数组对象去重
+ * 
+ */
+const mapFilter = (arr) => {
+    const res = new Map();
+    return arr.filter((arr) => !res.has(arr.name) && res.set(arr.name, 1))
+};
+
+export default {
+    mapFilter,
+}
+-------- >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+import { mapFilter } from '@/filters/index.js'
+
+bb() {
+  var data=[
+    {id:1,name:'bob'},
+    {id:1,name:'bob'},
+    {id:1,name:'bob'},
+    {id:1,name:'lucy'},
+    {id:1,name:'lucy'},
+    {id:2,name:'lucy'},
+    {id:2,name:'张三'} ]
+  // datas为需要去重的数组对象
+  that.tableRightUsdtData=mapFilter(data);
+  console.log(that.tableRightUsdtData);
+}
+
+```
+
+
 - 例子 1
 
 ```js

@@ -5,9 +5,9 @@
 import request from '@/common/api/http'
 
 /**
- *  Common
+ *  Common.js
  * 
- *  方法二：
+ *  方二：
  *  import { get, post } from '@/common/api/http'
  *  export const apiAddress = params => post('pCNotHomePage?type' + '=' + 5, params);
  * 

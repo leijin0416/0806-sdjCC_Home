@@ -1,5 +1,18 @@
+## 反向代理
 
-### Api 管理
+#### 1、本地 baseURL要为空
+
+![JS去重](http://localhost:4000/images/08_04/icon-hd_1019_1.jpg) 
+
+#### 2、vue.config.js 反向代理。 /api –为代理规则。
+
+![JS去重](http://localhost:4000/images/08_04/icon-hd_1019_2.jpg) 
+
+#### 3、 请求统一管理，组件调用，rankGender() –为当前请求的接口。【】最后需要重新运行 npm！！！
+
+![JS去重](http://localhost:4000/images/08_04/icon-hd_1019_3.jpg) 
+
+### 【1】Api 管理
 
 参考文章：https://juejin.im/post/5d22d6b1e51d45105d63a58e
 
@@ -7,21 +20,25 @@
 
 - **api/common.js：**
 
-暴露接口：
+export 暴露接口方法：
 
 ```js
+    //方一
     import request from '@/common/api/http'
-||
-    import { post } from '@/common/api/http'
-    
+
     export const getAdminList = (params) => {
         return request('post', 'pCNotHomePage?type' + '=' + 5, params);
     }
+    // 方二
+    import { post } from '@/common/api/http'
+
+    export const apiAddress = params => post('pCNotHomePage?type' + '=' + 5, params);
+    
 
 ```
-#### 组件中调用方法：
+### 【2】组件中调用方法：
 
-- 1、方法暴露使用（common.js中使用方法二）：
+- 1、方法暴露使用（common.js中使用`方法二`）：
 
 ```js
     import { getAdminList, apiAddress } from '@/api/common.js';// 导入我们的api接口

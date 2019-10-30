@@ -10,6 +10,7 @@ import request from '@/common/api/http'
  *  方二：
  *  import { get, post } from '@/common/api/http'
  *  export const apiAddress = params => post('pCNotHomePage?type' + '=' + 5, params);
+ *  export const rankGender = data => request.post('market/ticker', data);
  * 
  */
 

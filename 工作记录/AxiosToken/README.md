@@ -88,6 +88,76 @@ async函数返回的是一个Promise对象，可以使用then函数添加回调�
 
 ---
 
+## token 设置
+
+```js
+
+// 2.0、在 request 拦截器实现
+axios.interceptors.request.use(config => {
+    // 请求头中添加 seesion
+    let tokenId = getStore('seesion');
+    
+    // 判断是否存在token，如果存在的话，则每个http header都加上token
+    if (tokenId == null && router.currentRoute.path == '/login') {// 本地无token,未登录 跳转至登录页面
+        router.push('/login')
+    } else {
+        if (config.data === undefined) {
+            config.data = {
+                "token": tokenId
+            }
+        } else {
+            Object.assign(config.headers, { 'token': tokenId });
+            //config.headers.Authorization = `${tokenId}`;
+        }
+    }
+    return config;
+
+    //config.data.hash = md5((new Date()).valueOf() + config.data.func);
+
+}, error => {
+    return Promise.reject(error);
+});
+
+// 1.0、在 response 拦截器实现, 拿后台返回
+axios.interceptors.response.use(response => {
+    // 存储 seesion
+    setStore('seesion', response.data.token);
+    let tokenId = getStore('seesion');
+    // 拦截 seesion
+    if (tokenId === null) {
+        //window.location.href = '/';
+        removeStore('seesion');
+        return Promise.reject(response);
+    }
+    // console.log(response.data.token);
+    
+    
+    
+    return response
+}, error => {
+    if (error.data) {
+        switch (error.response.status) {
+            case 400:
+                // 返回 401 清除token信息并跳转到登录页面
+                // store.commit("del_token");
+                router.push({
+                    path: "/",
+                    query: {}
+                });
+                break;
+            case 404:
+                router.push({ path: "/" });
+                break
+
+        }
+    }
+    return Promise.reject(error);
+});
+
+```
+
+---
+
 变量暴露
 
 ```js

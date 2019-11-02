@@ -65,7 +65,7 @@ http {
         #开始配置我们的反向代理
         location /api/ {
             proxy_set_header X-Real-IP $remote_addr;
-            #proxy_pass http://47.106.136.114:3000/ ;
+            proxy_pass http://47.106.136.114:3000/ ;
         }
           
         gzip on;

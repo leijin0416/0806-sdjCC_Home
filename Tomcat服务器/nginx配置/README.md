@@ -43,7 +43,7 @@ http {
 
 or
 
-```js
+```php
 [root@lb01 nginx-1.6.2]# cat -n conf/nginx.conf
 worker_processes  1;
 
@@ -75,7 +75,7 @@ http {
 
 ## nginx 小优化：
 
-```js
+```php
 server {
     gzip on;
     gzip_buffers 32 4k;

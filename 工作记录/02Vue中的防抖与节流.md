@@ -1,3 +1,5 @@
+[防抖与节流的相关问答](https://github.com/Advanced-Frontend/Daily-Interview-Question/issues/5)
+
 ### 函数防抖(debounce)：
 
 在事件被触发n秒后再执行回调，如果在这n秒内又被触发，则重新计时；典型的案例就是输入搜索：输入结束后n秒才进行搜索请求，n秒内又输入的内容，就重新计时。
@@ -6,7 +8,7 @@
 
 规定在一个单位时间内，只能触发一次函数，如果这个单位时间内触发多次函数，只有一次生效； 典型的案例就是鼠标不断点击触发，规定在n秒内多次点击只有一次生效。
 
-[参考git演示](https://www.cnblogs.com/yalong/p/10556665.html)
+[git 相关演示](https://www.cnblogs.com/yalong/p/10556665.html)
 
 ### 作用：
 
@@ -16,7 +18,7 @@
 
 ---
 
-[参考 2](https://blog.csdn.net/qq_34764577/article/details/82952368)
+[参考博客](https://blog.csdn.net/qq_34764577/article/details/82952368)
 
 ```js
 /**

@@ -14,6 +14,8 @@
 
 ![JS去重](https://leijin0416.coding.me/images/08_04/icon-hd_1019_3.jpg) 
 
+---
+
 ### 【1】Api 管理
 
 参考文章：https://juejin.im/post/5d22d6b1e51d45105d63a58e
@@ -31,6 +33,7 @@ export 暴露接口方法：
     export const getAdminList = (params) => {
         return request('post', 'pCNotHomePage?type' + '=' + 5, params);
     }
+    
     // 方二
     import { post } from '@/common/api/http'
 

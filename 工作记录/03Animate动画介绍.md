@@ -40,6 +40,58 @@ mounted(){
     wow.init();
 },
 ```
+---
+
+## vue 元素吸顶效果
+
+```html
+<div class="container" ref="d_jump">
+</div>
+
+<script>
+ /**
+  * 三目运算
+  * 两个高度比较
+  * 如果滑动距离 > 吸顶元素到页面顶端距离  动态添加
+  * 
+  * scrollTop >= this.offsetTop ? (this.scrollFixed = true, this.text = '已吸顶') : (this.scrollFixed = false, this.text = '需要吸顶');
+  */
+data: {
+    return: {
+        offsetHeight: '',
+        offsetTop: '',
+        headerFixed: 0
+    }
+},
+mounted() {
+    this.$nextTick(() => {
+        // 0、d_jump- 吸顶元素的ID
+        let headr = this.$refs.d_jump;
+        this.offsetTop = headr.offsetTop;
+        this.offsetHeight = headr.offsetHeight;  // 元素的高度
+        console.log("offsetHeight:" + this.offsetHeight);
+    });
+    window.addEventListener('scroll', this.handleScroll);
+},
+methods: {
+    handleScroll() {
+        let that = this;
+        // 1、得到页面滚动的距离
+        let scrollTop = window.pageYOffset || document.documentElement.scrollTop ||document.body.scrollTop;						
+        // 2、判断页面滚动的距离是否大于吸顶元素的位置
+        that.headerFixed = scrollTop > (that.offsetHeight * 2);
+
+        /* 当滚动的距离（scrollTop）大于 元素（offsetHeight）高度/位置时，返回 true */
+        console.log(this.headerFixed); 
+    },
+},
+// 离开清除
+destroyed(){
+    window.removeEventListener('scroll', this.handleScroll);
+},
+</script>
+
+```
 
 ---
 

@@ -1,6 +1,6 @@
-### 数组去重
+## 数组去重
 
-- **1、indexOf实现**
+- ### 1、`for() -indexOf`
 
 ```js
 // indexOf实现
@@ -19,8 +19,9 @@ function unique(array) {
 
 console.log(unique(array));
 ```
+---
 
-- **2、filter 实现**
+- ### 2、`filter() 实现`
 
 ```js
 var array = [1, 2, 1, 1, '1'];
@@ -36,8 +37,9 @@ function unique(array) {
 
 console.log(unique(array));
 ```
+---
 
-- **3、sort 排序去重**
+- ### 3、sort 排序去重 
 
 ```js
 var array = [1, 2, 1, 1, '1'];
@@ -51,9 +53,12 @@ function unique(array) {
 }
 
 console.log(unique(array));
+
 ```
 
-- **4、Object键值对**
+---
+
+- ### 4、Object键值对 
 
 ```js
 // Object键值对
@@ -73,11 +78,11 @@ console.log(unique(array)); // [{value: 1}, {value: 2}]
 
 ---
 
-### 数组：
+## 数组：
 
 数组笔记：https://juejin.im/post/5cb878ff51882534de611223
 
-#### 1）sort：数组的排序
+### 1）sort：数组的排序
 
 - sort 排序 【原数组发生改变】，从小到大排序（10以内）
 
@@ -99,7 +104,7 @@ let ary = arr.sort(function (n,m) {
 console.log(ary);           //排序后的新数组
 ```
 
-#### 2）resverse ： 倒序
+### 2）resverse ： 倒序
 
 - 将原数组倒着排列 原数组发生改变 【返回的是原数组】
 
@@ -109,7 +114,7 @@ var ss = a.reverse();       //=>101, 12, 22, 11, 5, 24, 1, 3
 a === ss                    //=>true
 ```
 
-#### 3）concat：数组的拼接
+### 3）concat：数组的拼接
 
 - 返回值：拼接好的新数组，【不会影响原数组】
 
@@ -121,7 +126,7 @@ var b = [4,5,6];
 var ss = a.concat(b);       //=>1,2,3,4,5,6
 ```
 
-#### 4）forEach & map：数组遍历
+### 4）forEach & map：数组遍历
 
 - forEach：数组内置遍历方法 forEach: 专门用来循环数组的。 两个参数:
 
@@ -154,7 +159,7 @@ var a2 = a.map(function(item,index,ary){
 });
 ```
 
-#### 5）filter：数组过滤
+### 5）filter：数组过滤
 
 - 数组的过滤，过滤条件成立的这个值
 

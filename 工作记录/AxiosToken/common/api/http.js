@@ -1,11 +1,11 @@
-import axios from "axios";
-import { setStore, getStore, removeStore } from '@/common/util';
+import axios from "axios"
+import { setStore, getStore } from '@/common/util'
+import CryptoJS from '@/filters/md5Test'  // 加密
 
 axios.defaults = {
     baseURL: '',
-    timeout: 1000,
-    withCredentials: false,
-    headers: {'X-Requested-With': 'XMLHttpRequest'},
+    timeout: 60*1000,
+    withCredentials: false
 }
 
 // 在 request 拦截器实现    -给后台
@@ -62,7 +62,7 @@ export default {
             axios({
                 method: 'get',
                 url,
-                params: param,
+                params: param
             })
             .then(res => {
                 resolve(res)
@@ -78,7 +78,7 @@ export default {
             axios({
                 method: 'post',
                 url,
-                data: param,
+                data: param
             })
             .then(res => {
                 resolve(res);

@@ -4,4 +4,4 @@
 import Request from '@/common/utils/http';
 
 /* Common */
-export const rankGender = (params) => Request.post('/api/pcUser/loginByPhone', params);
+export const rankGender = params => Request.post('/api/pcUser/loginByPhone', params);

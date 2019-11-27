@@ -3,7 +3,7 @@
 https://docschina.org/
 
 
-### filters 用法
+## filters 过滤用法
 
 - filters/index.js `-全局过滤器 常用方法`
 
@@ -11,9 +11,12 @@ https://docschina.org/
 
 - filters/md5Test.js `-md5加密方法`
 
-**filters/index.js 处理方法：**
+---
+
+**`filters/index.js 处理方法：`**
 
 ![filters](https://leijin0416.coding.me/images/08_04/icon-hd_0921_2.jpg) 
+
 ```js
 /**
  *  man.js
@@ -34,30 +37,52 @@ Object.keys(filters).forEach(filterName => {
 
 ```
 
-- **js 删除当前元素**
-
-```js
-
-```
+- **`js 删除当前元素`**
 
 #### VUE 全局过滤器 filter： https://www.jianshu.com/p/6ead0ed825da
 
 ---
 
-### 正则验证
-
-- **组件引用：**
+## md5加密 暴露方法
 
 ```js
-// 使用 (模块中引入)：
+//下载
+npm install --save js-md5
+```
+
+- main.js
+
+```js
+// 全局调用
+import test from './assets/js/md5Test.js'
+
+Vue.use(test)
+```
+
+- 组件引用：
+
+```js
+let aa = '123456';
+this.$md5(aa);
+
+console.log(this.$md5(aa));
+```
+
+---
+
+## 正则验证
+
+- **`组件引用：`**
+
+```js
+    // 使用 (模块中引入)：
     import {regs, regex, reEmail, myreg, regNum} from '@/assets/js/regExps.js' .
 
-// 判断：
+
     if (!regNum.test(showKeyValue))   //不为纯数字时
-    
 
 ```
-- **js 转换：**
+- **`js 转换：`**
 
 
 ```js
@@ -83,7 +108,7 @@ let messageData = this.historyData.reverse();
 
 ```
 
-- **forEach() 用法：**
+- **`forEach() 用法：`**
 
 ```js
 /*  创建新节点  */
@@ -102,7 +127,7 @@ getElementById()            //通过元素Id，唯一性
 
 ```
 
-- **DOM操作：**
+- **`DOM操作：`**
 
 ```js
 /*
@@ -114,31 +139,4 @@ all.forEach( (item, i, arr) => {
     //console.log(item);
 });
 
-```
-
----
-
-### md5加密 暴露方法
-
-```js
-//下载
-npm install --save js-md5
-```
-
-- main.js
-
-```js
-// 全局调用
-import test from './assets/js/md5Test.js'
-
-Vue.use(test)
-```
-
-- 组件引用：
-
-```js
-let aa = '123456';
-this.$md5(aa);
-
-console.log(this.$md5(aa));
 ```

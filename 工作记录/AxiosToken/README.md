@@ -24,7 +24,7 @@
 
 - **api/common.js：**
 
-export 暴露接口方法：
+`export 暴露接口方法：`
 
 ```js
     //方一
@@ -35,9 +35,9 @@ export 暴露接口方法：
     }
     
     // 方二
-    import { post } from '@/common/api/http'
+    import Request from '@/common/utils/http'
 
-    export const apiAddress = params => post('pCNotHomePage?type' + '=' + 5, params);
+    export const rankGender = (params: object) => Request.post('/api/pcUser/loginByPhone', params)
     
 
 ```
@@ -95,7 +95,7 @@ async函数返回的是一个Promise对象，可以使用then函数添加回调�
 
 ```js
 
-// 2.0、在 request 拦截器实现
+// 2.0、在 request 拦截器实现，给后台
 axios.interceptors.request.use(config => {
     // 请求头中添加 seesion
     let tokenId = getStore('seesion');
@@ -128,13 +128,10 @@ axios.interceptors.response.use(response => {
     let tokenId = getStore('seesion');
     // 拦截 seesion
     if (tokenId === null) {
-        //window.location.href = '/';
+        window.location.href = '/';
         removeStore('seesion');
         return Promise.reject(response);
     }
-    // console.log(response.data.token);
-    
-    
     
     return response
 }, error => {

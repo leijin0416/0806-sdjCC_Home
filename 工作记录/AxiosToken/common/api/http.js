@@ -1,19 +1,20 @@
 import axios from "axios"
 import { setStore, getStore } from '@/common/util'
-import CryptoJS from '@/filters/md5Test'  // 加密
+import CryptoJS from '@/filters/md5Test'  // 3des字符串加密
 
 axios.defaults = {
     baseURL: '',
     timeout: 60*1000,
-    withCredentials: false
+    withCredentials: true,
+    headers: {'X-Requested-With': 'XMLHttpRequest'}
 }
 
-// 在 request 拦截器实现    -给后台
+/**
+ *  在 request 拦截器实现    -给后台
+ *  每次发送请求之前判断是否存在token，如果存在，则统一在http请求的header都加上token，不用每次请求都手动添加了
+ *  即使本地存在token，也有可能token是过期的，所以在响应拦截器中要对返回状态进行判断
+ */
 axios.interceptors.request.use(config => {
-    /**
-     *  每次发送请求之前判断是否存在token，如果存在，则统一在http请求的header都加上token，不用每次请求都手动添加了
-     *  即使本地存在token，也有可能token是过期的，所以在响应拦截器中要对返回状态进行判断
-     */
     const token = getStore('token');
     token && (config.headers.Authorization = token);
 	
@@ -22,12 +23,13 @@ axios.interceptors.request.use(config => {
     return Promise.reject(error);
 });
 
-// 在 response 拦截器实现 -拿后台
+/**
+ *  在 response 拦截器实现   -拿后台
+ */
 axios.interceptors.response.use(response => {
     // 存储
     setStore('token', response.data.token);
     //console.log(response);
-    
     return response;
 
 }, err => {
@@ -53,7 +55,6 @@ axios.interceptors.response.use(response => {
     }
     return Promise.resolve(err.response);
 });
-
 
 export default {
     // get请求

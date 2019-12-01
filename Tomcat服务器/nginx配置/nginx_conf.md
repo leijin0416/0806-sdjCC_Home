@@ -75,25 +75,25 @@ http {
         gzip_types text/csv text/xml text/css text/plain text/javascript application/javascript application/x-javascript application/json application/xml;
         gzip_vary on;
 
-	   #expires 缓存调优
+        #expires 缓存调优
         location ~* \.(ico|jpe?g|gif|png|bmp|swf|flv)$ {
             root  html/dist;
             expires 10d;
             #log_not_found off;
             access_log off;
-	    }
-		
-	    location ~* \.(js|css)$ {
+        }
+
+        location ~* \.(js|css)$ {
             root  html/dist;
             expires 1d;
             log_not_found off;
             access_log off;
-	    }
+        }
 
-	   #favicon 丢失
-	   location ~ ^/favicon\.ico$ {
-		  root  html/dist;
-	   }
+        #favicon 丢失
+        location ~ ^/favicon\.ico$ {
+            root  html/dist;
+        }
 
         #error_page  404              /404.html;
         # redirect server error pages to the static page /50x.html

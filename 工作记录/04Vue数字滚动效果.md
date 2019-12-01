@@ -1,6 +1,6 @@
 # 组件：
 
-![JS去重](http://www.gaonengbattery.com/grow-number.gif)
+![grow-number](https://github.com/leijin0416/0806-Record_sdj.cc_Home/blob/master/%E7%81%AB%E9%B8%9F%E9%A1%B9%E7%9B%AE/Images/grow-number.gif)
 
 ```html
 <template>

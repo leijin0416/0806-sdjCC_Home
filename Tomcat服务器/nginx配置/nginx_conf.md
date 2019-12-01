@@ -28,24 +28,21 @@ http {
     #keepalive_timeout  0;
     keepalive_timeout  65;
 
-    #gzip  on;
-
     # 如果port_in_redirect为off时，那么始终按照默认的80端口；如果该指令打开，那么将会返回当前正在监听的端口。
     port_in_redirect off;
 
     # 前台展示打开的服务代理
     server {
-        listen       8082;
+        listen       80;
         server_name  localhost;
 
         #charset koi8-r;
-
         #access_log  logs/host.access.log  main;
-        #root /usr/local/nginx/html/dist;
+        #root html/dist;
         #index  index.html;
 
         location  / {
-            root   /usr/local/nginx/html/dist;
+            root   html/dist;
             index  index.html;
             #try_files $uri $uri/ /index.html =404;
             try_files $uri $uri/ @router;
@@ -65,20 +62,38 @@ http {
         #开始配置我们的反向代理
         location /api/ {
             proxy_set_header X-Real-IP $remote_addr;
-            proxy_pass http://47.106.136.114:3000/ ;
+            #proxy_pass http://47.106.136.114:3000/ ;
         }
-          
+        #set site favicon
+        
+        #gzip 调优
         gzip on;
-
-        gzip_buffers 32 4k;
-
+        gzip_http_version   1.1;    
+        gzip_buffers 4 32k;
         gzip_comp_level 6;
-
-        gzip_min_length 200;
-
-        gzip_types text/css text/xml application/javascript;
-
+        gzip_min_length 1000;
+        gzip_types text/csv text/xml text/css text/plain text/javascript application/javascript application/x-javascript application/json application/xml;
         gzip_vary on;
+
+	   #expires 缓存调优
+        location ~* \.(ico|jpe?g|gif|png|bmp|swf|flv)$ {
+            root  html/dist;
+            expires 10d;
+            #log_not_found off;
+            access_log off;
+	    }
+		
+	    location ~* \.(js|css)$ {
+            root  html/dist;
+            expires 1d;
+            log_not_found off;
+            access_log off;
+	    }
+
+	   #favicon 丢失
+	   location ~ ^/favicon\.ico$ {
+		  root  html/dist;
+	   }
 
         #error_page  404              /404.html;
         # redirect server error pages to the static page /50x.html
@@ -95,15 +110,6 @@ http {
     server {
         listen       4444;
         server_name  localhost;
-        #   charset koi8-r;
-        #   ssl_certificate      cert.pem;
-        #   ssl_certificate_key  cert.key;
-
-        #   ssl_session_cache    shared:SSL:1m;
-        #    ssl_session_timeout  5m;
-
-        #    ssl_ciphers  HIGH:!aNULL:!MD5;
-        #    ssl_prefer_server_ciphers  on;
 
         location / {
             root   /usr/local/nginx/html/web/;
@@ -119,16 +125,12 @@ http {
             proxy_set_header X-Real-IP $remote_addr;
             #proxy_pass http://47.106.136.114:3000/ ;
         }
+
         gzip on;
-
         gzip_buffers 32 4k;
-
         gzip_comp_level 6;
-
         gzip_min_length 200;
-
         gzip_types text/css text/xml application/javascript;
-
         gzip_vary on;
 
         error_page   500 502 503 504  /50x.html;

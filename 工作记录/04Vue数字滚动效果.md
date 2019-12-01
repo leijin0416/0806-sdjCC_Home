@@ -1,5 +1,7 @@
 # 组件：
 
+![JS去重](http://www.gaonengbattery.com/grow-number.gif)
+
 ```html
 <template>
     <div class="number-grow-warp">

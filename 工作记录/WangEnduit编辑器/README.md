@@ -14,6 +14,8 @@ http://chaping.github.io/plupload/doc/
 
 ---
 
+### `要注意向编辑器插入图片时的路径！！！` 图片可能已经到了服务器，但是`页面会报插入图片错误`，这就是图片插入时路径的问题, 在 result.data 前面插入 服务器上传图片成功后的路径即可
+
 ```js
 // 上传服务器地址，上传成功后会返回一个图片路径；
 this.editor.customConfig.uploadImgServer = "";
@@ -22,8 +24,8 @@ this.editor.customConfig.uploadImgServer = "";
 
 // 组件上传成功的回调
 customInsert: (insertImg, result, editor) => {
-    let url = '' + result.data;
-    insertImg(url); //插入图片
+    let url = 'http://xxxx.com/' + result.data;
+    insertImg(url);             // 向编辑器中插入图片
 }
 ```
 

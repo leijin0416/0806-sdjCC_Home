@@ -149,7 +149,7 @@
                          *  console.log(result.url)
                          */
 
-                        let url = 'http://xxxxx.com/' + result.data;
+                        let url = 'http://xxxx.com/' + result.data;
                         // 向编辑器插入图片
                         insertImg(url); 
                     }

@@ -1,7 +1,8 @@
 <template lang="html">
     <div class="editor-box" >
         <editor-bar 
-            v-model="values" 
+            v-model= "values" 
+            :isClear= "isClear"
             @change="OnTextChangeGg" />
     </div>
 </template>
@@ -14,6 +15,7 @@ export default {
     data() {
         return {
             values: '',
+            isClear: false
         }
     },
     components: {

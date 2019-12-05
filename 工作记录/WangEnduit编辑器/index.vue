@@ -8,6 +8,7 @@
 
 <script>
 import EditorBar from '@/components/wangEnduit/wangEnduit'
+
 export default {
     name: 'editoritem',
     data() {
@@ -24,7 +25,7 @@ export default {
         valueIndex: {
             type: String,
             default: ''
-        },
+        }
     },
     watch: {
     },

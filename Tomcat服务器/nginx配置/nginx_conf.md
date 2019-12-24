@@ -1,4 +1,6 @@
-## nginx.conf 文件配置
+# conf > nginx.conf 文件配置
+
+图片启用 GZip压缩 会适得其反，因为不仅浪费了CPU，还增大了体积，势必影响服务器性能，影响网站速度。
 
 ```php
 #user  nobody;

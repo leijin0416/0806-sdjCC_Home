@@ -15,6 +15,8 @@
 | 3、watch `that.navbarAddTags(newer)` | - 当 navbarName（也就是 name）数据发生变化时，也就是用户在点击左侧导航栏时更新，`执行 navbarAddTags() 方法` 该方法主要是 push 当前点击的数组对象 到 tagsList （tag列表数组）中|
 | 4、watch `tagsData: {}` | - 缓存 headerTagsData()方法的数据 |
 
+### 代码
+
 ```js
 import { mapState, mapMutations, mapActions, mapGetters } from "vuex"
 
@@ -80,6 +82,8 @@ watch: {
 | **2、tagData.forEach( (el, i, item) => { if (item[i].name === name) {} }  | - 当前选中的 name 与数组中的 name 判断，`相等就把其 push 到备份数组中` |
 | **3、let tagDataList = `that.mapFilter(that.tagsAdminList)` | - `关键 去重备份数组中的数据`，因为用户可能为点击相同路由，所以过滤一遍数组，将重复的剔除掉 |
 | 3、that.tagsList = tagDataList; / that.headerTagsData(tagDataList); | - 最后，将去重后的数组赋值给 tagsList（tag数组列表），并将其缓存到 headerTagsData() 中，防止刷新丢失 |
+
+### 代码
 
 ```js
 // 方法集合

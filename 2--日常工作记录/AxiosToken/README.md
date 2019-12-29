@@ -2,17 +2,17 @@
 
 #### 1、本地 baseURL要为空
 
-![JS去重](https://leijin0416.coding.me/images/08_04/icon-hd_1019_1.jpg) 
+![JS去重](http://120.79.222.255/icon-hd_1019_1.jpg) 
 
 #### 2、vue.config.js 反向代理。 /api –为代理规则。
 
 `设置 devServer ---> proxy`
 
-![JS去重](https://leijin0416.coding.me/images/08_04/icon-hd_1019_2.jpg) 
+![JS去重](http://120.79.222.255/icon-hd_1019_2.jpg) 
 
 #### 3、 请求统一管理，组件调用，rankGender() –为当前请求的接口。【】最后需要重新运行 npm！！！
 
-![JS去重](https://leijin0416.coding.me/images/08_04/icon-hd_1019_3.jpg) 
+![JS去重](http://120.79.222.255/icon-hd_1019_3.jpg) 
 
 ---
 

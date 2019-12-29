@@ -1,10 +1,11 @@
 import axios from "axios"
-import { setStore, getStore } from '@/common/util'
+import { Message } from 'view-design'
 import CryptoJS from '@/filters/md5Test'  // 3des字符串加密
+import { removeStore, getStore } from '@/common/localUtil'
 
 axios.defaults = {
     baseURL: '',
-    timeout: 60*1000,
+    timeout: 5000,
     withCredentials: true,
     headers: {'X-Requested-With': 'XMLHttpRequest'}
 }
@@ -14,22 +15,34 @@ axios.defaults = {
  *  每次发送请求之前判断是否存在token，如果存在，则统一在http请求的header都加上token，不用每次请求都手动添加了
  *  即使本地存在token，也有可能token是过期的，所以在响应拦截器中要对返回状态进行判断
  */
-axios.interceptors.request.use(config => {
+axios.interceptors.request.use( config => {
     const token = getStore('token');
     token && (config.headers.Authorization = token);
 	
     return config;
 }, error => {
+    
     return Promise.reject(error);
 });
 
 /**
  *  在 response 拦截器实现   -拿后台
  */
-axios.interceptors.response.use(response => {
+axios.interceptors.response.use( response => {
     // 存储
     setStore('token', response.data.token);
-    //console.log(response);
+    if (response.data.code === -1) {
+        Message.error({
+            content: '系统未检测到您的信息，请登录！',
+            background: true,
+            duration: 3
+        })
+        removeStore('hasSessionToken')
+        removeStore('hasUserName')
+        // window.location.href = '/login';
+    }
+    // window.location.href = '/login';
+
     return response;
 
 }, err => {
@@ -59,33 +72,33 @@ axios.interceptors.response.use(response => {
 export default {
     // get请求
     get(url, param) {
-        return new Promise((resolve, reject) => {
+        return new Promise( (resolve, reject) => {
             axios({
                 method: 'get',
                 url,
                 params: param
             })
-            .then(res => {
+            .then( res => {
                 resolve(res)
             })
-            .catch(err => {
-                reject(err.data)
+            .catch( err => {
+                reject(err)
             })
         })
     },
     // post请求
     post(url, param) {
-        return new Promise((resolve, reject) => {
+        return new Promise( (resolve, reject) => {
             axios({
                 method: 'post',
                 url,
                 data: param
             })
-            .then(res => {
+            .then( res => {
                 resolve(res);
             })
-            .catch(err => {
-                reject(err.data)
+            .catch( err => {
+                reject(err)
             })
         })
     }

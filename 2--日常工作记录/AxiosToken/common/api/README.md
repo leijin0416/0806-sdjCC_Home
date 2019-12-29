@@ -1,4 +1,29 @@
-### 接口暴露- request() 方式
+# 传递 token
+
+这里的 token 是带进到了请求头 res(或者config) > data 路径
+
+```js
+/**
+ *  2、再在 request 拦截器实现, 传给后台的
+ *     Encrypt加密
+ *     config.data.hash = md5((new Date()).valueOf() + config.data.func);
+ */
+axios.interceptors.request.use( config => {
+    const token = getStore('hasSessionToken')
+
+    token && (config.headers.token = token)
+    config.data = {
+        data: CryptoJS.Encrypt(JSON.stringify(config.data))
+    }
+
+    return config
+}, error => {
+
+    return Promise.reject(error);
+})
+```
+
+# 接口暴露- request() 方式
 
 ```js
 /**

@@ -35,16 +35,12 @@
                     </Menu>
                     <v-tag />
                 </Header>
-                <!-- 内容 -->
+                <!-- 主体内容 -->
                 <Content>
-                    <transition name="fade-transverse" mode="out-in">
-                        <keep-alive>
-                            <div class="ivu-container">
-                                <router-view>
-                                </router-view>
-                            </div>
-                        </keep-alive>
-                    </transition>
+                    <div class="ivu-container" :class="toEnterActive" >
+                        <router-view>
+                        </router-view>
+                    </div>
                 </Content>
             </Layout>
         </Layout>
@@ -64,6 +60,7 @@ export default {
 	name: 'index',
 	data() {
 		return {
+            toEnterActive: '',
             tagsName: '',
 			menuItemData: [
 				{
@@ -125,11 +122,11 @@ export default {
         'v-nav': NavBar,
         'v-tag': Tag
 	},
-	// 监听属性 类似于data概念
+	//监听属性 类似于data概念
 	computed: {
         ...mapGetters("localUser", ["navbarName"]),
     },
-	// 监控data中的数据变化
+	//监控data中的数据变化
 	watch: {
         "navbarName": {
 			handler: function(newer, older) {
@@ -148,39 +145,49 @@ export default {
 	methods: {
         ...mapMutations("localUser", ['headerNavbarName']),
         /**
-         *  选择菜单（MenuItem）时触发 导航 active-name
+         *  导航 active-name
          */
         onMenuCollapseClcik (val) {
             let that = this
             that.headerNavbarName(val)
             that.tagsName = val
+            that.toEnterActive = ''
+            setTimeout(() =>{
+                that.toEnterActive = 'v-enter v-enter-active'
+            }, 100);
             // console.log(val);
+        },
+        animationShow () {
+            let that = this
+            that.toEnterActive = 'v-enter v-enter-active'
         }
 	},
 	// 生命周期 - 创建完成（可以访问当前this实例）
 	created: async function() {
-		let that = this
+        let that = this
 		// that.interval=setInterval(this.changeUsdtData, 60*1000);
 	},
 	// 生命周期 - 挂载完成（可以访问DOM元素）
 	mounted() {
-        /**
-         *  刷新页面 同步 tagsName
-         */
+        let that = this
+        that.animationShow()
         let name = getStore('navbarName')
         if (name) {
-            this.tagsName = name
+            that.tagsName = name
+            that.animationShow()
         }
 	}
 }
 </script>
 
 <style lang="scss" scoped>
-
 .layout {
     background: #f5f7f9;
     position: relative;
     overflow: hidden;
+}
+.ivu-container {
+    display: none;
 }
 // 右侧主体
 .layout > .ivu-layout {

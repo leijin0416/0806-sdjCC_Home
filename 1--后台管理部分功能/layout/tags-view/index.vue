@@ -2,16 +2,18 @@
     <div class="tags-box">
         <ul>
             <li class="tags-li">
-                <Tag type="dot" color="success">绿色星球</Tag>
+                <Tag type="dot" color="success">绿色星球 </Tag>
             </li>
-            <li class="tags-li"
-                v-for="(item,index) in tagsList"
-                :key="index" >
-                <Tag type="dot" closable checkable
-                    :color="item.name === navbarNames ? 'primary' : 'default'"
-                    @on-change="onTagsChange(item)"
-                    @on-close="onTagsClose(item)" >{{item.title}}</Tag>
-            </li>
+            <transition-group>
+                <li class="tags-li"
+                    v-for="(item,index) in tagsList"
+                    :key="index" >
+                    <Tag type="dot" closable checkable
+                        :color="item.name === navbarNames ? 'primary' : 'default'"
+                        @on-change="onTagsChange(item)"
+                        @on-close="onTagsClose(item)" >{{item.title}}</Tag>
+                </li>
+            </transition-group> 
       </ul>
     </div>
 </template>
@@ -103,7 +105,7 @@ export default {
     },
     // 监听属性 类似于data概念
     computed: {
-        ...mapGetters("localUser", ["navbarName","tagsData"]),
+        ...mapGetters("localUser", ["navbarName", "tagsData"]),
 
     },
     // 监控data中的数据变化
@@ -215,10 +217,13 @@ export default {
         onTagsClose (event) {
             removeStore('tagsData')
             let that = this
+            if (that.oldvalNames === '') {
+                that.oldvalNames = getStore('navbarName')
+            }
             let navbarName = getStore('navbarName')
             let oldval = that.oldvalNames
-            // console.log('当前状态：' + navbarName);
             // console.log('旧的状态：' + oldval);
+            // console.log('当前状态：' + navbarName);
 
             let data = that.tagsList
             let backupData = that.tagsList
@@ -236,26 +241,28 @@ export default {
                     onClose: () => {}
                 })
             } else {
-                // 删除当前event元素 在原数组数据
-                // 问题
-                for (let i = 0; i < backupData.length; i++) {
-                    if (backupData[i].name == navbarName && backupData[i].name == name) {
-                        for (let j = 0; j < data.length; j++) {
-                            if (data[j].name == oldval) {
-                                that.$router.push({path: data[j].router})
-                                that.headerNavbarName(data[j].name)
-                                that.navbarNames = data[j].name
-                                // 旧的状态
-                                that.oldTagName = data[j].name
-                                // console.log('最新状态：' + that.navbarNames);
+                // 如果 当前高亮状态等于旧的状态，并且删除对象状态等于当前高亮状态
+                if (navbarName === oldval && name === navbarName) {
+                    that.$router.push({path: data[0].router})
+                    that.headerNavbarName(data[0].name)
+                    that.navbarNames = data[0].name
+                    
+                } else {
+                    // 删除当前event元素 在原数组数据
+                    // 问题
+                    for (let i = 0; i < backupData.length; i++) {
+                        if (backupData[i].name == navbarName && backupData[i].name == name) {
+                            for (let j = 0; j < data.length; j++) {
+                                if (data[j].name == oldval) {
+                                    that.$router.push({path: data[j].router})
+                                    that.headerNavbarName(data[j].name)
+                                    that.navbarNames = data[j].name
+                                    // 旧的状态
+                                    that.oldTagName = data[j].name
+                                    // console.log('最新状态：' + that.navbarNames);
+                                }
+                                backupData.remove(event)
                             }
-                            backupData.remove(event)
-                        }
-                    } else {
-                        if (navbarName === oldval) {
-                            that.$router.push({path: backupData[0].router})
-                            that.headerNavbarName(backupData[0].name)
-                            that.navbarNames = backupData[0].name
                         }
                     }
                 }
@@ -265,7 +272,7 @@ export default {
                 that.tagsAdminList = backupTagsData
                 that.tagsList = data
                 that.headerTagsData(data)
-                // console.log('主的数组' + that.tagsList);
+                // console.log('主的数组' +that.tagsList);
                 // console.log('备份数组' + that.tagsAdminList);
             }
         }
@@ -283,20 +290,31 @@ export default {
             that.tagsAdminList = tagDataList
         }
         // that.navbarAddTags()
-        console.log(tagDataList);
+        // console.log(tagDataList);
         // console.log(getStore('navbarName'));
     }
 }
 </script>
 
 <style lang="scss" scoped>
-/*@import url(); 引入公共css类*/
+// transition-group 动画效果
+.v-enter,
+.v-leave-to{
+    opacity: 0;
+    transform: translateX(80px);
+}
+.v-enter-active,
+.v-leave-active{
+    transition: all .25s ease-in-out; 
+}
+// ----- END -----
+
 .tags-box {
     padding: 2px 15px;
     border-top: 1px solid #f0f0f0;
     border-bottom: 1px solid #e6e6e6;
     box-shadow: inset 0 0 15px hsla(0,0%,39.2%,.1);
-    background: #fff;
+    background: #fbfbfb;
     ul {
         font-size: 0;
         li {

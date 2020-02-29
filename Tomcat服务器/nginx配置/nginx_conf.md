@@ -1,6 +1,8 @@
 # conf > nginx.conf 文件配置
 
-图片启用 GZip压缩 会适得其反，因为不仅浪费了CPU，还增大了体积，势必影响服务器性能，影响网站速度。
+### 》图片启用 GZip压缩 会适得其反，因为不仅浪费了CPU，还增大了体积，势必影响服务器性能，影响网站速度。
+
+### 配置：
 
 ```php
 #user  nobody;
@@ -30,10 +32,10 @@ http {
     #keepalive_timeout  0;
     keepalive_timeout  65;
 
-    # 如果port_in_redirect为off时，那么始终按照默认的80端口；如果该指令打开，那么将会返回当前正在监听的端口。
+    #如果port_in_redirect为off时，那么始终按照默认的80端口；如果该指令打开，那么将会返回当前正在监听的端口。
     port_in_redirect off;
 
-    # 前台展示打开的服务代理
+    #前台展示打开的服务代理
     server {
         listen       80;
         server_name  localhost;
@@ -63,38 +65,43 @@ http {
 
         #开始配置我们的反向代理
         location /api/ {
-            proxy_set_header X-Real-IP $remote_addr;
             #proxy_pass http://47.106.136.114:3000/ ;
+            #后端的Web服务器可以通过 X-Real-IP 获取用户真实IP
+            proxy_set_header X-Real-IP $remote_addr;
+            proxy_connect_timeout 90;          #nginx跟后端服务器连接超时时间(代理连接超时)
+            proxy_send_timeout 90;             #后端服务器数据回传时间(代理发送超时)
+            proxy_read_timeout 90;             #连接成功后，后端服务器响应时间(代理接收超时)
+            proxy_buffer_size 4k;              #设置代理服务器（nginx）保存用户头信息的缓冲区大小
+            proxy_buffers 4 32k;               #proxy_buffers缓冲区，网页平均在32k以下的话，这样设置
+            proxy_busy_buffers_size 64k;       #高负荷下缓冲大小（proxy_buffers*2）
+            proxy_temp_file_write_size 64k;    #设定缓存文件夹大小，大于这个值，将从upstream服务器传
         }
         #set site favicon
         
         #gzip 调优
         gzip on;
         gzip_http_version   1.1;    
-        gzip_buffers 4 32k;
-        gzip_comp_level 6;
-        gzip_min_length 1000;
-        gzip_types text/csv text/xml text/css text/plain text/javascript application/javascript application/x-javascript application/json application/xml;
+        gzip_buffers 32 4k; #缓冲(压缩在内存中缓冲几块? 每块多大?)
+        gzip_comp_level 6;  #推荐6 压缩级别(级别越高,压的越小,越浪费CPU计算资源)
+        gzip_min_length 300; #开始压缩的最小长度(再小就不要压缩了,意义不在)
+        gzip_types application/javascript text/css text/xml;
+        gzip_disable "MSIE [1-6]\."; #配置禁用gzip条件，支持正则。此处表示ie6及以下不启用gzip（因为ie低版本不支持）
         gzip_vary on;
 
-        #expires 缓存调优
+        #expires 缓存调优  位置确认到父级地址
         location ~* \.(ico|jpe?g|gif|png|bmp|swf|flv)$ {
-            root  html/dist;
+            root  /html/dist;
             expires 10d;
-            #log_not_found off;
-            access_log off;
         }
 
         location ~* \.(js|css)$ {
-            root  html/dist;
+            root  /html/dist;
             expires 1d;
-            log_not_found off;
-            access_log off;
         }
 
-        #favicon 丢失
+        #设置expires后，防止favicon 丢失
         location ~ ^/favicon\.ico$ {
-            root  html/dist;
+            root  /html/dist;
         }
 
         #error_page  404              /404.html;
@@ -106,36 +113,10 @@ http {
         }
     }
 
-
-    # HTTPS server
     # 管理后台打开的服务代理
     server {
         listen       4444;
         server_name  localhost;
-
-        location / {
-            root   /usr/local/nginx/html/web/;
-            index  index.html index.htm;
-            try_files $uri $uri/ @router;
-            autoindex on;
-        }
-        location @router{
-            rewrite ^.*$ /index.html last;
-        }
-
-        location /api/ {
-            proxy_set_header X-Real-IP $remote_addr;
-            #proxy_pass http://47.106.136.114:3000/ ;
-        }
-
-        gzip on;
-        gzip_buffers 32 4k;
-        gzip_comp_level 6;
-        gzip_min_length 200;
-        gzip_types text/css text/xml application/javascript;
-        gzip_vary on;
-
-        error_page   500 502 503 504  /50x.html;
     }
 }
 ```

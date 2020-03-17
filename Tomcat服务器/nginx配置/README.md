@@ -1,5 +1,8 @@
 # nginx 概述
 
+理解NGINX就是一个HTTP服务器（web服务器），反向代理服务器，或者说邮件服务器。
+
+
 # nginx 负载均衡：
 
 [`git -参考配置`](https://github.com/biaochenxuying/blog/issues/18)
@@ -70,18 +73,3 @@ http {
     }
 }
 ```
-
-## nginx gzip 小优化：
-
-```php
-server {
-    gzip on;
-    gzip_buffers 32 4k;
-    gzip_comp_level 6;
-    gzip_min_length 200;
-    gzip_types text/css text/xml application/javascript;
-    gzip_vary on;
-}
-```
-
-ngonx 开启 gzip，加快首屏渲染时间，图片并不适用

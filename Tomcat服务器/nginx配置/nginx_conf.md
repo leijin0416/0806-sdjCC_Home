@@ -2,6 +2,25 @@
 
 ### 》图片启用 GZip压缩 会适得其反，因为不仅浪费了CPU，还增大了体积，势必影响服务器性能，影响网站速度。
 
+相关安全配置
+
+```php
+http {
+    server_tokens off; #nginx 版本信息泄露，服务器头部不显示
+    server {
+        listen       80;
+        #域名，如果没有域名可以使用ip进行访问
+        server_name  localhost;
+
+        location / {
+            add_header X-Frame-Options "SAMEORIGIN";
+            add_header X-Content-Type-Options nosniff;
+            add_header X-XSS-Protection "1; mode=block";
+        }
+    }
+}
+```
+
 ### 配置：
 
 ```php
@@ -23,15 +42,12 @@ http {
     #log_format  main  '$remote_addr - $remote_user [$time_local] "$request" '
     #                  '$status $body_bytes_sent "$http_referer" '
     #                  '"$http_user_agent" "$http_x_forwarded_for"';
-
     #access_log  logs/access.log  main;
 
     sendfile        on;
     #tcp_nopush     on;
-
     #keepalive_timeout  0;
     keepalive_timeout  65;
-
     #如果port_in_redirect为off时，那么始终按照默认的80端口；如果该指令打开，那么将会返回当前正在监听的端口。
     port_in_redirect off;
 
@@ -39,12 +55,10 @@ http {
     server {
         listen       80;
         server_name  localhost;
-
         #charset koi8-r;
         #access_log  logs/host.access.log  main;
         #root html/dist;
         #index  index.html;
-
         location  / {
             root   html/dist;
             index  index.html;

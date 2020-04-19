@@ -1,6 +1,6 @@
 # conf > nginx.conf 文件配置
 
-### > 图片启用 GZip压缩 会适得其反，因为不仅浪费了CPU，还增大了体积，势必影响服务器性能，影响网站速度。
+#### > 图片启用 GZip压缩 会适得其反，因为不仅浪费了CPU，还增大了体积，势必影响服务器性能，影响网站速度。
 
 相关安全配置：
 
@@ -17,6 +17,19 @@ http {
             add_header X-Content-Type-Options nosniff;
             add_header X-XSS-Protection "1; mode=block";
         }
+
+        location /api/ {
+            proxy_pass http://47.106.136.114/ ;
+            #后端的Web服务器可以通过 X-Real-IP 获取用户真实IP
+            proxy_set_header X-Real-IP $remote_addr;
+            proxy_connect_timeout 90;          #nginx跟后端服务器连接超时时间(代理连接超时)
+            proxy_send_timeout 90;             #后端服务器数据回传时间(代理发送超时)
+            proxy_read_timeout 90;             #连接成功后，后端服务器响应时间(代理接收超时)
+            proxy_buffer_size 4k;              #设置代理服务器（nginx）保存用户头信息的缓冲区大小
+            proxy_buffers 4 32k;               #proxy_buffers缓冲区，网页平均在32k以下的话，这样设置
+            proxy_busy_buffers_size 64k;       #高负荷下缓冲大小（proxy_buffers*2）
+            proxy_temp_file_write_size 64k;    #设定缓存文件夹大小，大于这个值，将从upstream服务器传
+        }
     }
 }
 ```
@@ -26,44 +39,33 @@ http {
 ```php
 #user  nobody;
 worker_processes  1;
-#error_log  logs/error.log;
-#error_log  logs/error.log  notice;
-#error_log  logs/error.log  info;
-#pid        logs/nginx.pid;
-
 events {
     worker_connections  1024;
 }
 
 http {
+    server_tokens off; 
     include       mime.types;
     default_type  application/octet-stream;
-
-    #log_format  main  '$remote_addr - $remote_user [$time_local] "$request" '
-    #                  '$status $body_bytes_sent "$http_referer" '
-    #                  '"$http_user_agent" "$http_x_forwarded_for"';
-    #access_log  logs/access.log  main;
 
     sendfile        on;
     #tcp_nopush     on;
     #keepalive_timeout  0;
     keepalive_timeout  65;
-    #如果port_in_redirect为off时，那么始终按照默认的80端口；如果该指令打开，那么将会返回当前正在监听的端口。
     port_in_redirect off;
 
     #前台展示打开的服务代理
     server {
         listen       80;
         server_name  localhost;
-        #charset koi8-r;
-        #access_log  logs/host.access.log  main;
-        #root html/dist;
-        #index  index.html;
-        location  / {
+
+        location / {
             root   html/dist;
             index  index.html;
-            #try_files $uri $uri/ /index.html =404;
             try_files $uri $uri/ @router;
+            add_header X-Frame-Options "SAMEORIGIN";
+            add_header X-Content-Type-Options nosniff;
+            add_header X-XSS-Protection "1; mode=block";
             autoindex on;       #开启nginx目录浏览功能
             autoindex_exact_size off;   #文件大小从KB开始显示
             charset utf-8;          #显示中文
@@ -79,22 +81,20 @@ http {
 
         #开始配置我们的反向代理
         location /api/ {
-            #proxy_pass http://47.106.136.114:3000/ ;
-            #后端的Web服务器可以通过 X-Real-IP 获取用户真实IP
+            proxy_pass http://47.106.136.114/ ;
             proxy_set_header X-Real-IP $remote_addr;
-            proxy_connect_timeout 90;          #nginx跟后端服务器连接超时时间(代理连接超时)
-            proxy_send_timeout 90;             #后端服务器数据回传时间(代理发送超时)
-            proxy_read_timeout 90;             #连接成功后，后端服务器响应时间(代理接收超时)
-            proxy_buffer_size 4k;              #设置代理服务器（nginx）保存用户头信息的缓冲区大小
-            proxy_buffers 4 32k;               #proxy_buffers缓冲区，网页平均在32k以下的话，这样设置
-            proxy_busy_buffers_size 64k;       #高负荷下缓冲大小（proxy_buffers*2）
-            proxy_temp_file_write_size 64k;    #设定缓存文件夹大小，大于这个值，将从upstream服务器传
+            proxy_connect_timeout 90;
+            proxy_send_timeout 90;
+            proxy_read_timeout 90;
+            proxy_buffer_size 4k;
+            proxy_buffers 4 32k;
+            proxy_busy_buffers_size 64k;
+            proxy_temp_file_write_size 64k;
         }
-        #set site favicon
         
         #gzip 调优
         gzip on;
-        gzip_http_version   1.1;    
+        gzip_http_version   1.1;
         gzip_buffers 32 4k; #缓冲(压缩在内存中缓冲几块? 每块多大?)
         gzip_comp_level 6;  #推荐6 压缩级别(级别越高,压的越小,越浪费CPU计算资源)
         gzip_min_length 300; #开始压缩的最小长度(再小就不要压缩了,意义不在)
@@ -104,13 +104,13 @@ http {
 
         #expires 缓存调优  位置确认到父级地址
         location ~* \.(ico|jpe?g|gif|png|bmp|swf|flv)$ {
-            root  /html/dist;
+            root  /html/dist/img;
             expires 10d;
         }
 
         location ~* \.(js|css)$ {
-            root  /html/dist;
-            expires 1d;
+            root  /html/dist/js;
+            expires 10d;
         }
 
         #设置expires后，防止favicon 丢失
@@ -118,9 +118,6 @@ http {
             root  /html/dist;
         }
 
-        #error_page  404              /404.html;
-        # redirect server error pages to the static page /50x.html
-        #
         error_page   500 502 503 504  /50x.html;
         location = /50x.html {
             root   html;

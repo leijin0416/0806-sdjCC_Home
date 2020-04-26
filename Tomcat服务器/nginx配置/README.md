@@ -1,9 +1,8 @@
-# nginx 概述
+## nginx 概述
 
-理解NGINX就是一个HTTP服务器（web服务器），反向代理服务器，或者说邮件服务器。
+理解 NGINX 就是一个HTTP服务器（web服务器），反向代理服务器，或者说邮件服务器。
 
-
-# nginx 负载均衡：
+## nginx 负载均衡：
 
 [`git -参考配置`](https://github.com/biaochenxuying/blog/issues/18)
 

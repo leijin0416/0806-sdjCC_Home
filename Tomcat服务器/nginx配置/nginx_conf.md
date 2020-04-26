@@ -1,7 +1,5 @@
 # conf > nginx.conf 文件配置
 
-#### > 图片启用 GZip压缩 会适得其反，因为不仅浪费了CPU，还增大了体积，势必影响服务器性能，影响网站速度。
-
 相关安全配置：
 
 ```php
@@ -47,7 +45,11 @@ http {
 | gzip_vary | 跟Squid等缓存服务有关，on 的话会在 Header 里增加 "Vary: Accept-Encoding" |
 | gzip_disable | IE6 对 Gzip 不怎么友好，不给它Gzip了 |
 
-[gzip 参考文档](https://blog.csdn.net/bigtree_3721/article/details/79849503)
+- 图片启用 GZip压缩 会适得其反，因为不仅浪费了CPU，还增大了体积，势必影响服务器性能，影响网站速度;
+
+- **需要与 webpack GZip 配合使用；**
+
+[对于 gzip 参考](https://blog.csdn.net/bigtree_3721/article/details/79849503)
 
 ```php
 #user  nobody;

@@ -47,7 +47,7 @@ http {
 
 - 图片启用 GZip压缩 会适得其反，因为不仅浪费了CPU，还增大了体积，势必影响服务器性能，影响网站速度;
 
-- **需要与 webpack GZip 配合使用；**
+- **需要与 webpack GZip 配合使用；**[点击跳转查看->](https://github.com/leijin0416/Vue-Plug-in_unit/blob/master/9-01%E3%80%81vue-webpack.md)
 
 [对于 gzip 参考](https://blog.csdn.net/bigtree_3721/article/details/79849503)
 

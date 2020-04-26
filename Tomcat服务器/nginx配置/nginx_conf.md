@@ -36,6 +36,19 @@ http {
 
 ### 配置：
 
+| 方法 | 描述 |
+| ------ | ------ |
+| gzip on; | 开启Gzip |
+| gzip_min_length | 不压缩临界值，大于1K的才压缩，一般不用改 |
+| gzip_buffers  | buffer |
+| gzip_http_version | 用了反向代理的话，末端通信是 HTTP/1.0；默认是 HTTP/1.1 |
+| gzip_comp_level | 压缩级别，1-10，数字越大压缩的越好，时间也越长,越浪费 CPU 计算资源 |
+| gzip_types | 进行压缩的文件类型，JavaScript有两种写法 application/javascript |
+| gzip_vary | 跟Squid等缓存服务有关，on 的话会在 Header 里增加 "Vary: Accept-Encoding" |
+| gzip_disable | IE6 对 Gzip 不怎么友好，不给它Gzip了 |
+
+[gzip 参考文档](https://blog.csdn.net/bigtree_3721/article/details/79849503)
+
 ```php
 #user  nobody;
 worker_processes  1;
@@ -91,29 +104,29 @@ http {
             proxy_busy_buffers_size 64k;
             proxy_temp_file_write_size 64k;
         }
-        
+
         #gzip 调优
-        gzip on;
-        gzip_http_version   1.1;
-        gzip_buffers 32 4k; #缓冲(压缩在内存中缓冲几块? 每块多大?)
-        gzip_comp_level 6;  #推荐6 压缩级别(级别越高,压的越小,越浪费CPU计算资源)
-        gzip_min_length 300; #开始压缩的最小长度(再小就不要压缩了,意义不在)
-        gzip_types application/javascript text/css text/xml;
-        gzip_disable "MSIE [1-6]\."; #配置禁用gzip条件，支持正则。此处表示ie6及以下不启用gzip（因为ie低版本不支持）
-        gzip_vary on;
+        gzip  on;
+        gzip_disable “MSIE[1 - 6].(?!.* SV1) ”;
+        gzip_http_version 1.0;
+        gzip_vary on;
+        gzip_proxied any;
+        gzip_min_length 1k;
+        gzip_buffers 4 16k;
+        gzip_comp_level 6;
+        gzip_types text / plain text / css text / xml text / javascript application / json application / x - javascript application / xml application / xml + rss application / javascript;
 
         #expires 缓存调优  位置确认到父级地址
         location ~* \.(ico|jpe?g|gif|png|bmp|swf|flv)$ {
             root  /html/dist/img;
             expires 10d;
         }
-
         location ~* \.(js|css)$ {
             root  /html/dist/js;
             expires 10d;
         }
 
-        #设置expires后，防止favicon 丢失
+        #设置 expires 后，防止favicon 丢失
         location ~ ^/favicon\.ico$ {
             root  /html/dist;
         }

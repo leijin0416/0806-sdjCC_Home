@@ -26,14 +26,14 @@ server {
     server_name  localhost;
 
     #gzip 调优
-    gzip  on;
-    gzip_disable “MSIE[1 - 6].(?!.* SV1) ”;
-    gzip_http_version 1.0;
-    gzip_vary on;
-    gzip_proxied any;
-    gzip_min_length 1k;
-    gzip_buffers 4 16k;
-    gzip_comp_level 6;
-    gzip_types text / plain text / css text / xml text / javascript application / json application / x - javascript application / xml application / xml + rss application / javascript;
+    gzip  on;
+    gzip_disable “MSIE [1-6].(?!.*SV1)”;
+    gzip_http_version 1.0;
+    gzip_vary on;
+    gzip_proxied any;
+    gzip_min_length 1k;
+    gzip_buffers 4 16k;
+    gzip_comp_level 6;
+    gzip_types text/plain text/css text/xml text/javascript application/json application/x-javascript application/xml application/xml+rss application/javascript;
 }
 ```

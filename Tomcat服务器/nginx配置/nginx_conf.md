@@ -52,71 +52,12 @@ http {
 [对于 gzip 参考](https://blog.csdn.net/bigtree_3721/article/details/79849503)
 
 ```php
-#user  nobody;
-worker_processes  1;
-events {
-    worker_connections  1024;
-}
-
 http {
-    server_tokens off; 
-    include       mime.types;
-    default_type  application/octet-stream;
-
-    sendfile        on;
-    #tcp_nopush     on;
-    #keepalive_timeout  0;
-    keepalive_timeout  65;
-    port_in_redirect off;
 
     #前台展示打开的服务代理
     server {
         listen       80;
         server_name  localhost;
-
-        location / {
-            root   html/dist;
-            index  index.html;
-            try_files $uri $uri/ @router;
-            add_header X-Frame-Options "SAMEORIGIN";
-            add_header X-Content-Type-Options nosniff;
-            add_header X-XSS-Protection "1; mode=block";
-            autoindex on;       #开启nginx目录浏览功能
-            autoindex_exact_size off;   #文件大小从KB开始显示
-            charset utf-8;          #显示中文
-            add_header 'Access-Control-Allow-Origin' '*'; #允许来自所有的访问地址
-            add_header 'Access-Control-Allow-Credentials' 'true';
-            add_header 'Access-Control-Allow-Methods' 'GET, PUT, POST, DELETE, OPTIONS'; #支持请求方式
-            add_header 'Access-Control-Allow-Headers' 'Content-Type,*';
-        }
-
-        location @router{
-            rewrite ^.*$ /index.html last;
-        }
-
-        #开始配置我们的反向代理
-        location /api/ {
-            proxy_pass http://47.106.136.114/ ;
-            proxy_set_header X-Real-IP $remote_addr;
-            proxy_connect_timeout 90;
-            proxy_send_timeout 90;
-            proxy_read_timeout 90;
-            proxy_buffer_size 4k;
-            proxy_buffers 4 32k;
-            proxy_busy_buffers_size 64k;
-            proxy_temp_file_write_size 64k;
-        }
-
-        #gzip 调优
-        gzip  on;
-        gzip_disable “MSIE [1-6].(?!.*SV1)”;
-        gzip_http_version 1.0;
-        gzip_vary on;
-        gzip_proxied any;
-        gzip_min_length 1k;
-        gzip_buffers 4 16k;
-        gzip_comp_level 6;
-        gzip_types text/plain text/css text/xml text/javascript application/json application/x-javascript application/xml application/xml+rss application/javascript;
 
         #expires 缓存调优  位置确认到父级地址
         location ~* \.(ico|jpe?g|gif|png|bmp|swf|flv)$ {
@@ -132,17 +73,114 @@ http {
         location ~ ^/favicon\.ico$ {
             root  /html/dist;
         }
+    }
+}
+```
 
+```php
+#user  nobody;
+worker_processes  1;
+#error_log  logs/error.log;
+#error_log  logs/error.log  notice;
+#error_log  logs/error.log  info;
+#pid        logs/nginx.pid;
+
+events {
+    worker_connections  1024;
+}
+
+http {
+    server_tokens off;
+    include       mime.types;
+    default_type  application/octet-stream;
+
+    #log_format  main  '$remote_addr - $remote_user [$time_local] "$request" '
+    #                  '$status $body_bytes_sent "$http_referer" '
+    #                  '"$http_user_agent" "$http_x_forwarded_for"';
+
+    #access_log  logs/access.log  main;
+
+    sendfile        on;
+    #tcp_nopush     on;
+
+    #keepalive_timeout  0;
+    keepalive_timeout  65;
+
+    #gzip  on;
+
+    #如果port_in_redirect为off时，那么始终按照默认的80端口；如果该指令打开，那么将会返回当前正在监听的端口。
+    port_in_redirect off;
+
+    #前台展示打开的服务代理
+    server {
+        listen       80;
+	    #listen		  443;
+        server_name  localhost;
+
+        #charset koi8-r;
+
+        #access_log  logs/host.access.log  main;
+        #root /usr/local/nginx/html;
+        #index  index.html;
+
+        location / {
+            root   /usr/local/nginx/html/dist;
+            index  index.html;
+            try_files $uri $uri/@router;
+            add_header X-Frame-Options "SAMEORIGIN";
+            add_header X-Content-Type-Options nosniff;
+            add_header X-XSS-Protection "1; mode=block";
+            autoindex on;                                   #开启nginx目录浏览功能
+            autoindex_exact_size off;                       #文件大小从KB开始显示
+            charset utf-8;                                  #显示中文
+            add_header 'Access-Control-Allow-Origin' '*';   #允许来自所有的访问地址
+            add_header 'Access-Control-Allow-Credentials' 'true';
+            add_header 'Access-Control-Allow-Methods' 'GET, POST'; #支持请求方式
+            add_header 'Access-Control-Allow-Headers' 'Content-Type,*';
+        }
+		
+        location @router{
+            rewrite ^.*$ /index.html last;
+        }
+
+        #开始配置我们的反向代理
+        location /api/ {
+            #proxy_set_header X-Real-IP $remote_addr;
+            #proxy_pass http://114.55.165.42:6100/ ;
+        }
+          
+	    gzip  on;
+	    gzip_disable “MSIE [1-6].(?!.*SV1)”;
+	    gzip_http_version 1.1;
+	    gzip_vary on;
+	    gzip_proxied any;
+	    gzip_min_length 1k;
+	    gzip_buffers 4 16k;
+	    gzip_comp_level 6;
+	    gzip_types text/plain text/css text/xml text/javascript application/json application/x-javascript application/xml application/xml+rss application/javascript;
+
+	    #expires 缓存调优  位置确认到父级地址
+        location ~* \.(ico|jpe?g|gif|png|bmp|swf|flv)$ {
+            root  /usr/local/nginx/html/dist/img;
+            expires 15d;
+        }
+        location ~* \.(js|css)$ {
+            root  /usr/local/nginx/html/dist/js;
+            expires 15d;
+        }
+
+	    #设置 expires 后，防止favicon 丢失
+        location ~ ^/favicon\.ico$ {
+            root  /usr/local/nginx/html/dist;
+        }
+
+        #error_page  404              /404.html;
+        # redirect server error pages to the static page /50x.html
+        #
         error_page   500 502 503 504  /50x.html;
         location = /50x.html {
             root   html;
         }
-    }
-
-    # 管理后台打开的服务代理
-    server {
-        listen       4444;
-        server_name  localhost;
     }
 }
 ```

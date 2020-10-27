@@ -7,8 +7,7 @@ http {
     server_tokens off; #nginx 版本信息泄露，服务器头部不显示
     server {
         listen       80;
-        #域名，如果没有域名可以使用ip进行访问
-        server_name  localhost;
+        server_name  localhost;  #域名，如果没有域名可以使用ip进行访问
 
         location / {
             add_header X-Frame-Options "SAMEORIGIN";
@@ -32,7 +31,7 @@ http {
 }
 ```
 
-### 配置：
+## 配置
 
 | 方法 | 描述 |
 | ------ | ------ |
@@ -53,12 +52,10 @@ http {
 
 ```php
 http {
-
     #前台展示打开的服务代理
     server {
         listen       80;
         server_name  localhost;
-
         #expires 缓存调优  位置确认到父级地址
         location ~* \.(ico|jpe?g|gif|png|bmp|swf|flv)$ {
             root  /html/dist/img;
@@ -68,7 +65,6 @@ http {
             root  /html/dist/js;
             expires 10d;
         }
-
         #设置 expires 后，防止favicon 丢失
         location ~ ^/favicon\.ico$ {
             root  /html/dist;
@@ -84,7 +80,6 @@ worker_processes  1;
 #error_log  logs/error.log  notice;
 #error_log  logs/error.log  info;
 #pid        logs/nginx.pid;
-
 events {
     worker_connections  1024;
 }
@@ -98,15 +93,8 @@ http {
     #                  '$status $body_bytes_sent "$http_referer" '
     #                  '"$http_user_agent" "$http_x_forwarded_for"';
 
-    #access_log  logs/access.log  main;
-
     sendfile        on;
-    #tcp_nopush     on;
-
-    #keepalive_timeout  0;
     keepalive_timeout  65;
-
-    #gzip  on;
 
     #如果port_in_redirect为off时，那么始终按照默认的80端口；如果该指令打开，那么将会返回当前正在监听的端口。
     port_in_redirect off;
@@ -114,11 +102,7 @@ http {
     #前台展示打开的服务代理
     server {
         listen       80;
-	    #listen		  443;
         server_name  localhost;
-
-        #charset koi8-r;
-
         #access_log  logs/host.access.log  main;
         #root /usr/local/nginx/html;
         #index  index.html;
@@ -138,40 +122,25 @@ http {
             add_header 'Access-Control-Allow-Methods' 'GET, POST'; #支持请求方式
             add_header 'Access-Control-Allow-Headers' 'Content-Type,*';
         }
-		
-        location @router{
-            rewrite ^.*$ /index.html last;
-        }
 
         #开始配置我们的反向代理
         location /api/ {
             #proxy_set_header X-Real-IP $remote_addr;
             #proxy_pass http://114.55.165.42:6100/ ;
         }
-          
-	    gzip  on;
-	    gzip_disable “MSIE [1-6].(?!.*SV1)”;
-	    gzip_http_version 1.1;
-	    gzip_vary on;
-	    gzip_proxied any;
-	    gzip_min_length 1k;
-	    gzip_buffers 4 16k;
-	    gzip_comp_level 6;
-	    gzip_types text/plain text/css text/xml text/javascript application/json application/x-javascript application/xml application/xml+rss application/javascript;
 
-	    #expires 缓存调优  位置确认到父级地址
-        location ~* \.(ico|jpe?g|gif|png|bmp|swf|flv)$ {
-            root  /usr/local/nginx/html/dist/img;
-            expires 15d;
-        }
-        location ~* \.(js|css)$ {
-            root  /usr/local/nginx/html/dist/js;
-            expires 15d;
-        }
+        gzip  on;
+        gzip_disable “MSIE [1-6].(?!.*SV1)”;
+        gzip_http_version 1.1;
+        gzip_vary on;
+        gzip_proxied any;
+        gzip_min_length 1k;
+        gzip_buffers 4 16k;
+        gzip_comp_level 6;
+        gzip_types text/plain text/css text/xml text/javascript application/json application/x-javascript application/xml application/xml+rss application/javascript;
 
-	    #设置 expires 后，防止favicon 丢失
-        location ~ ^/favicon\.ico$ {
-            root  /usr/local/nginx/html/dist;
+        location @router{
+            rewrite ^.*$ /index.html last;
         }
 
         #error_page  404              /404.html;

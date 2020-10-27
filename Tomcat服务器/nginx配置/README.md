@@ -1,26 +1,25 @@
-## nginx 概述
+# nginx 概述
 
 理解 NGINX 就是一个HTTP服务器（web服务器），反向代理服务器，或者说邮件服务器。
 
-## nginx 负载均衡：
+## nginx 负载均衡
 
 [`git -参考配置`](https://github.com/biaochenxuying/blog/issues/18)
 
 - 1、ip_hash（使用宇保持会话）
 
 - 2、修改权重测试 -weight=1
- 
+
 ```php
 http {
-    ###此处省略一大堆没有改的配置
-    ##自定义我们的服务列表
+    #自定义我们的服务列表
     upstream myserver{
        server 127.0.0.1:8080;
        server 127.0.0.1:8090;
-     }
+    }
 
    server {
-        listen       8888 ; ##设置我们nginx监听端口为8888
+        listen       8888 ; #设置我们nginx监听端口为8888
         server_name  [服务器的ip地址];
 
         # Load configuration files for the default server block.
